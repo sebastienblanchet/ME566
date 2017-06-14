@@ -1,0 +1,23 @@
+# ignore MoldDesignFileHandler.Document
+*.out
+
+#AUX File (.aux)
+*.aux
+
+#BBL file
+*.bbl
+
+#Performance Monitor File (.blg)
+*.blg
+
+# Front matter
+*.lof
+*.lot
+*.toc
+*.pdf
+
+# log files
+*.log
+
+#python appendix files see ASME repo
+*.py

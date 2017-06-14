@@ -45,3 +45,24 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# ignore MoldDesignFileHandler.Document
+*.out
+
+#AUX File (.aux)
+*.aux
+
+#BBL file
+*.bbl
+
+#Performance Monitor File (.blg)
+*.blg
+
+# Front matter
+*.lof
+*.lot
+*.toc
+*.pdf
+
+# log files
+*.log

@@ -3,7 +3,7 @@
 %-----------------------------------------------------------------------------------------------------------------
 %% Section 1 : Introduction
 \chapter{Introduction}
-\label{chapt:intro}
+\label{chap:intro}
 
 As per \cite{assign}, \ref{eq:Gov} is presented as follows:
 
@@ -14,6 +14,7 @@ As per \cite{assign}, \ref{eq:Gov} is presented as follows:
 
 Yielding the following solution using CDS as per \cite{assign} and previously completed assignment.
 
+%equation * creates no number
 \begin{equation*}
 	\begin{bmatrix}
 		78.6	&	-0.4	&	-25.0 	&	0		\\
@@ -26,3 +27,47 @@ Yielding the following solution using CDS as per \cite{assign} and previously co
 	=
 	\begin{pmatrix} 5064	\\	5000	\\	2564	\\ 2500 \end{pmatrix}	
 \end{equation*}
+
+%-----------------------------------------------------------------------------------------------------------------
+%% Section 2 : Jacobi
+\chapter{Jacobi Method}
+\label{chap:jacobi}
+
+Assuming $T_1=T_2=T_3=T_4=0$, the Jacobi Method (JM) is used \ref{eq:jacobi} from \cite{cfdbook}.
+
+\begin{equation}
+	\label{eq:jacobi}	
+	T_i^k = \frac{1}{a_{ii}} \left( \sum_{j=1, j \neq i}^{n} - a_{ij} T_j^k  + Su_i \right)
+\end{equation}
+
+%-----------------------------------------------------------------------------------------------------------------
+%% Section 3 : GS
+\chapter{Gauss-Seidel Method}
+\label{chap:gauss}
+
+Assuming $T_1=T_2=T_3=T_4=0$, the Gauss-Seidel Method (GSM) is used \ref{eq:gs} from \cite{cfdbook}.
+
+\begin{equation}
+	\label{eq:gs}	
+	T_i^k = \frac{1}{a_{ii}} \left( \sum_{j=1}^{i-1} - a_{ij} T_j^k  + \sum_{j=i+1}^{n} - a_{ij} T_j^{k-1} + Su_i \right)
+\end{equation}
+
+%-----------------------------------------------------------------------------------------------------------------
+%% Section 4 : Relax
+\chapter{Relaxation Method}
+\label{chap:relax}
+
+
+Assuming $T_1=T_2=T_3=T_4=0$, the Relaxtion Method (RM) is used \ref{eq:rlx} from \cite{cfdbook}.
+
+\begin{equation}
+	\label{eq:rlx}	
+	T_i^k = T_i^{k-1} + \frac{1}{a_{ii}} \left( \sum_{j=1}^{i-1} - a_{ij} T_j^k  + \sum_{j=i+1}^{n} - a_{ij} T_j^{k-1} + Su_i \right)
+\end{equation}
+
+%-----------------------------------------------------------------------------------------------------------------
+%% Section 5 : Error
+\chapter{Error}
+\label{chap:error}
+
+

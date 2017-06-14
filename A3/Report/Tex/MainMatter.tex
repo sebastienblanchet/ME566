@@ -3,3 +3,26 @@
 %-----------------------------------------------------------------------------------------------------------------
 %% Section 1 : Introduction
 \chapter{Introduction}
+\label{chapt:intro}
+
+As per \cite{assign}, \ref{eq:Gov} is presented as follows:
+
+\begin{equation}
+	\label{eq:Gov}	
+	\frac{\partial(uT)}{\partial x} + \frac{\partial(vT)}{\partial y}= \frac{\partial}{\partial x} \left( \alpha \frac{\partial T}{\partial x} \right) + \frac{\partial}{\partial y} \left( \alpha \frac{\partial T}{\partial y} \right)
+\end{equation}
+
+Yielding the following solution using CDS as per \cite{assign} and previously completed assignment.
+
+\begin{equation*}
+	\begin{bmatrix}
+		78.6	&	-0.4	&	-25.0 	&	0		\\
+		-1.6	&	76.6 	&	0  		&	-25.0	\\
+		-25.0	&	0   	&	78.6	&	-0.4	\\
+		0  		&	-25.0	&	-1.6	&	76.6
+	\end{bmatrix}
+	\centerdot 
+	\begin{pmatrix} T_1	\\	T_2	\\	T_3	\\ T_4	\end{pmatrix}
+	=
+	\begin{pmatrix} 5064	\\	5000	\\	2564	\\ 2500 \end{pmatrix}	
+\end{equation*}

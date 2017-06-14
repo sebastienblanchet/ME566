@@ -166,7 +166,7 @@
 	\vfill
 	
 	Prepared by:\\
-	\UW@value@author\\
+	\UW@value@author\
 	
 	\vfill
 	

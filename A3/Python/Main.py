@@ -16,37 +16,37 @@ Ax = dely
 Ay = delx
 
 # Create solution matrix
-A = np.zeros((n, n))
+a = np.zeros((n, n))
 Su = np.zeros((n, 1))
 
 # Manually input solution to create matrix
 # node 1 (recall python start at 0)
 Su[0] = ((2*Dx+Fx)*Ax)*TA+(2*Dy*Ay)*TC
-A[0, 1] = (Fx/2-Dx)*Ax
-A[0, 2] = -Dy*Ay
-A[0, 0] = (3*Dx+Fx/2)*Ax+(3*Dy*Ay)
+a[0, 1] = (Fx / 2 - Dx) * Ax
+a[0, 2] = -Dy * Ay
+a[0, 0] = (3 * Dx + Fx / 2) * Ax + (3 * Dy * Ay)
 
 # node 2
 Su[1] = (2*Dy*Ay)*TC
-A[1, 0] = -(Dx+Fx/2)*Ax
-A[1, 3] = -Dy*Ay
-A[1, 1] = (Dx+Fx/2)*Ax+(3*Dy*Ay)
+a[1, 0] = -(Dx + Fx / 2) * Ax
+a[1, 3] = -Dy * Ay
+a[1, 1] = (Dx + Fx / 2) * Ax + (3 * Dy * Ay)
 
 # node 3
 Su[2] = ((2*Dx+Fx)*Ax)*TA+2*Dy*Ay*TD
-A[2, 0] = -Dy*Ay
-A[2, 3] = -(Dx-Fx/2)*Ax
-A[2, 2] = (3*Dx+Fx/2)*Ax+(3*Dy*Ay)
+a[2, 0] = -Dy * Ay
+a[2, 3] = -(Dx - Fx / 2) * Ax
+a[2, 2] = (3 * Dx + Fx / 2) * Ax + (3 * Dy * Ay)
 
 # node 4
 Su[3] = (2*Dy*Ay)*TD
-A[3, 1] = -Dy*Ay
-A[3, 2] = -(Dx+Fx/2)*Ax
-A[3, 3] = (Dx+Fx/2)*Ax+(3*Dy*Ay)
+a[3, 1] = -Dy * Ay
+a[3, 2] = -(Dx + Fx / 2) * Ax
+a[3, 3] = (Dx + Fx / 2) * Ax + (3 * Dy * Ay)
 
 
 # Initialize solutions
-relax, Nmax = 1, 100
+relax, Nmax = 1.1, 100
 Tj = np.zeros((n, Nmax))
 Tgs = np.zeros((n, Nmax))
 Trlx= np.zeros((n, Nmax))
@@ -62,18 +62,18 @@ for k in range(1, Nmax):
         for j in range(0, n):
             # JM
             if j != i:
-                Sumj[i, k] += -A[i, j] * Tj[j, k - 1]
-            Tj[i, k] = (1/A[i, i])*(Sumj[i, k] + Su[i])
+                Sumj[i, k] += -a[i, j] * Tj[j, k - 1]
+            Tj[i, k] = (1 / a[i, i]) * (Sumj[i, k] + Su[i])
+
             # GSM
-            if j+1 <= i:
-                Sumgs1[i, k] += -A[i, j] * Tj[j, k]
-            if j-1 >= i:
-                Sumgs2[i, k] += -A[i, j] * Tj[j, k - 1]
-            Tgs[i, k] = (1 / A[i, i]) * (Sumgs1[i, k] + Sumgs2[i, k] + Su[i])
+            if j <= i-1:
+                Sumgs1[i, k] += -a[i, j] * Tj[j, k]
+            if j >= i+1:
+                Sumgs2[i, k] += -a[i, j] * Tj[j, k - 1]
+            Tgs[i, k] = (1 / a[i, i]) * (Sumgs1[i, k] + Sumgs2[i, k] + Su[i])
+
             # RM
-            if j <= n-1:
-                Sumrlx[i, k] += -A[i, j] * Tj[j, k - 1]
-            Trlx[i, k] = Trlx[i, k-1] + (relax / A[i, i]) * (Sumrlx[i, k] + Su[i])
+            Trlx[i, k] = relax*Tgs[i, k] + (1-relax)*Trlx[i, k-1]
 
 # Get exact solution
 Tex = Tj[:, Nmax-1]

@@ -1,17 +1,10 @@
 # Import relevant modules
 import numpy as np
-import matplotlib.pyplot as plt
 
 # Define constants
-u = 12
-L = 1
-H = 0.2
-rho = 1
-alph = 5
-TA = 20
-TC = 100
-TD = 50
-n = 4;
+u, L, H, rho, alph, n = 12, 1, 0.2, 1, 5, 4
+# Boundary conditions
+TA, TC, TD = 20, 100, 50
 
 # Calculate parameters
 delx = L/2
@@ -27,7 +20,7 @@ A = np.zeros((n, n))
 Su = np.zeros((n, 1))
 
 # Manually input solution to create matrix
-# node 1
+# node 1 (recall python start at 0)
 Su[0] = ((2*Dx+Fx)*Ax)*TA+(2*Dy*Ay)*TC
 A[0, 1] = (Fx/2-Dx)*Ax
 A[0, 2] = -Dy*Ay
@@ -52,9 +45,8 @@ A[3, 2] = -(Dx+Fx/2)*Ax
 A[3, 3] = (Dx+Fx/2)*Ax+(3*Dy*Ay)
 
 
-# Init
-relax = 1.1
-Nmax = 100
+# Initialize solutions
+relax, Nmax = 1, 100
 Tj = np.zeros((n, Nmax))
 Tgs = np.zeros((n, Nmax))
 Trlx= np.zeros((n, Nmax))
@@ -63,31 +55,46 @@ Sumgs1 = np.zeros((n, Nmax))
 Sumgs2 = np.zeros((n, Nmax))
 Sumrlx = np.zeros((n, Nmax))
 
+# Cycle through iterations k
 for k in range(1, Nmax):
-
+    # Cycle through matrix i,j
     for i in range(0, n):
-
         for j in range(0, n):
-
-            # Jacobi method
-            if j !=i:
+            # JM
+            if j != i:
                 Sumj[i, k] += -A[i, j] * Tj[j, k - 1]
-
             Tj[i, k] = (1/A[i, i])*(Sumj[i, k] + Su[i])
-
-            # gs method
-            if j <= i-1:
+            # GSM
+            if j+1 <= i:
                 Sumgs1[i, k] += -A[i, j] * Tj[j, k]
-            elif j >= i+1:
+            if j-1 >= i:
                 Sumgs2[i, k] += -A[i, j] * Tj[j, k - 1]
-
             Tgs[i, k] = (1 / A[i, i]) * (Sumgs1[i, k] + Sumgs2[i, k] + Su[i])
+            # RM
+            if j <= n-1:
+                Sumrlx[i, k] += -A[i, j] * Tj[j, k - 1]
+            Trlx[i, k] = Trlx[i, k-1] + (relax / A[i, i]) * (Sumrlx[i, k] + Su[i])
 
-            # Relaxation
-            Sumrlx[i, k] += -A[i, j] * Tj[j, k - 1]
-
-            Trlx[i, k] = Trlx[i, k-1] + (relax / A[i, i]) * (Sumrlx[i, k]+ Su[i])
-
+# Get exact solution
 Tex = Tj[:, Nmax-1]
 
-print('Done')
+# Compute errors
+err = np.zeros((3, 1))
+itnum = 3
+
+for e in range(0, n):
+    # Error for JM
+    err[0] += abs(Tj[e, itnum] - Tex[e])
+    # Error for GSM
+    err[1] += abs(Tgs[e, itnum] - Tex[e])
+    # Error for RLM
+    err[2] += abs(Trlx[e, itnum] - Tex[e])
+
+T = Trlx - Tgs
+
+# Export Results
+np.savetxt('Results\Tj.csv', Tj[:, 1:itnum+1], delimiter=',')
+np.savetxt('Results\Tgs.csv', Tgs[:, 1:itnum+1], delimiter=',')
+np.savetxt('Results\Trlx.csv', Trlx[:, 1:itnum+1], delimiter=',')
+np.savetxt('Results\err.csv', err[:, 1:itnum+1], delimiter=',')
+

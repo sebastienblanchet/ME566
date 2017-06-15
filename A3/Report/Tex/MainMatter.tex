@@ -5,7 +5,7 @@
 \chapter{Introduction}
 \label{chap:intro}
 
-As per \cite{assign}, \ref{eq:Gov} is presented as follows:
+As per \cite{assign}, Equation~\ref{eq:Gov} is presented as follows:
 
 \begin{equation}
 	\label{eq:Gov}	
@@ -33,12 +33,29 @@ Yielding the following solution using CDS as per \cite{assign} and previously co
 \chapter{Jacobi Method}
 \label{chap:jacobi}
 
-Assuming $T_1=T_2=T_3=T_4=0$, the Jacobi Method (JM) is used \ref{eq:jacobi} from \cite{cfdbook}.
+Assuming $T_1^0=T_2^0=T_3^0=T_4^0=0$, the Jacobi Method (JM), the algorithm in Equation~\ref{eq:jacobi} \cite{cfdbook} is implemented numerically (see script \cite{python} in Appendix).
 
 \begin{equation}
 	\label{eq:jacobi}	
-	T_i^k = \frac{1}{a_{ii}} \left( \sum_{j=1, j \neq i}^{n} - a_{ij} T_j^k  + Su_i \right)
+	T_i^k = \frac{1}{a_{ii}} \left( \sum_{j=1, j \neq i}^{n} - a_{ij} T_j^{k-1}  + Su_i \right)
 \end{equation}
+
+The results for $k=3$ iterations are shown below in Table~\ref{tab:jac} below.
+
+\begin{table}[H]
+  \centering
+  \caption{Results for $k=3$ iterations using JM.}
+    \begin{tabular}{cccc}
+    & \textbf{$k=1$} & \textbf{$k=2$} & \textbf{$k=3$} \\
+    \midrule
+    \textbf{$T_1$} & 64.4275 & 75.1353 & 81.7670 \\
+    \textbf{$T_2$} & 65.2742 & 77.2717 & 84.6706 \\
+    \textbf{$T_3$} & 32.6209 & 53.2792 & 56.7968 \\
+    \textbf{$T_4$} & 32.6371 & 54.6220 & 58.9692 \\
+    \end{tabular}
+  \label{tab:jac}
+\end{table}
+
 
 %-----------------------------------------------------------------------------------------------------------------
 %% Section 3 : GS
@@ -52,6 +69,23 @@ Assuming $T_1=T_2=T_3=T_4=0$, the Gauss-Seidel Method (GSM) is used \ref{eq:gs} 
 	T_i^k = \frac{1}{a_{ii}} \left( \sum_{j=1}^{i-1} - a_{ij} T_j^k  + \sum_{j=i+1}^{n} - a_{ij} T_j^{k-1} + Su_i \right)
 \end{equation}
 
+The results for $k=3$ iterations are shown below in Table~\ref{tab:gs} below.
+
+\begin{table}[H]
+  \centering
+  \caption{Results for $k=3$ iterations using GS.}
+    \begin{tabular}{cccc}
+          & $k=1$ & $k=2$ & $k=3$ \\
+    \midrule
+    $T_1$ & 1.0000 & 1.0000 & 1.0000 \\
+    $T_2$ & 1.0000 & 1.0000 & 1.0000 \\
+    $T_3$ & 1.0000 & 1.0000 & 1.0000 \\
+    $T_4$ & 1.0000 & 1.0000 & 1.0000 \\
+    \end{tabular}
+  \label{tab:gs}
+\end{table}
+
+
 %-----------------------------------------------------------------------------------------------------------------
 %% Section 4 : Relax
 \chapter{Relaxation Method}
@@ -62,12 +96,53 @@ Assuming $T_1=T_2=T_3=T_4=0$, the Relaxtion Method (RM) is used \ref{eq:rlx} fro
 
 \begin{equation}
 	\label{eq:rlx}	
-	T_i^k = T_i^{k-1} + \frac{1}{a_{ii}} \left( \sum_{j=1}^{i-1} - a_{ij} T_j^k  + \sum_{j=i+1}^{n} - a_{ij} T_j^{k-1} + Su_i \right)
+	T_i^k = T_i^{k-1} + \frac{\omega}{a_{ii}} \left( \sum_{j=1}^{n} - a_{ij} T_j^{k-1} + Su_i \right)
 \end{equation}
+
+
+The results for $k=3$ iterations are shown below in Table~\ref{tab:rm} below.
+
+\begin{table}[H]
+  \centering
+  \caption{Results for $k=3$ iterations using RM.}
+    \begin{tabular}{cccc}
+          & $k=1$ & $k=2$ & $k=3$ \\
+    \midrule
+    $T_1$ & 1.0000 & 1.0000 & 1.0000 \\
+    $T_2$ & 1.0000 & 1.0000 & 1.0000 \\
+    $T_3$ & 1.0000 & 1.0000 & 1.0000 \\
+    $T_4$ & 1.0000 & 1.0000 & 1.0000 \\
+    \end{tabular}
+  \label{tab:rm}
+\end{table}
+
+
 
 %-----------------------------------------------------------------------------------------------------------------
 %% Section 5 : Error
 \chapter{Error}
 \label{chap:error}
+
+The error term for each method is computed with Equation~\ref{eq:err} as per \cite{assign}.
+
+\begin{equation}
+	\label{eq:err}	
+	e = |T_1 - T_{1_{ex}}|+|T_2 - T_{2_{ex}}|+|T_3 - T_{3_{ex}}|+|T_4 - T_{4_{ex}}|
+\end{equation}
+
+Where $T_1 = 83.8295, T_2 = 87.3921, T_3 = 59.6018, T_4 = 62.4042$. The error $e$ was computed for the JM, GSM and RM. The results are summarized below in Table~\ref{tab:err}.
+
+\begin{table}[H]
+  \centering
+  \caption{Error results for each iterative method.}
+    \begin{tabular}{c|c}
+    $e_{JM}$ 	& 1.0000 \\
+    $e_{GSM}$ 	& 1.0000 \\
+    $e_{RM}$ 	& 1.0000 \\
+    \end{tabular}
+  \label{tab:err}
+\end{table}
+
+From these results, it may be concluded that the XXX iterative method is the most efficient.
 
 

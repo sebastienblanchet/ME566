@@ -53,7 +53,6 @@ Trlx= np.zeros((n, Nmax))
 Sumj = np.zeros((n, Nmax))
 Sumgs1 = np.zeros((n, Nmax))
 Sumgs2 = np.zeros((n, Nmax))
-Sumrlx = np.zeros((n, Nmax))
 
 # Cycle through iterations k
 for k in range(1, Nmax):
@@ -64,12 +63,11 @@ for k in range(1, Nmax):
             if j != i:
                 Sumj[i, k] += -a[i, j] * Tj[j, k - 1]
             Tj[i, k] = (1 / a[i, i]) * (Sumj[i, k] + Su[i])
-
             # GSM
             if j <= i-1:
-                Sumgs1[i, k] += -a[i, j] * Tj[j, k]
+                Sumgs1[i, k] += -a[i, j] * Tgs[j, k]
             if j >= i+1:
-                Sumgs2[i, k] += -a[i, j] * Tj[j, k - 1]
+                Sumgs2[i, k] += -a[i, j] * Tgs[j, k - 1]
             Tgs[i, k] = (1 / a[i, i]) * (Sumgs1[i, k] + Sumgs2[i, k] + Su[i])
 
             # RM
@@ -81,7 +79,6 @@ Tex = Tj[:, Nmax-1]
 # Compute errors
 err = np.zeros((3, 1))
 itnum = 3
-
 for e in range(0, n):
     # Error for JM
     err[0] += abs(Tj[e, itnum] - Tex[e])
@@ -90,11 +87,8 @@ for e in range(0, n):
     # Error for RLM
     err[2] += abs(Trlx[e, itnum] - Tex[e])
 
-T = Trlx - Tgs
-
 # Export Results
 np.savetxt('Results\Tj.csv', Tj[:, 1:itnum+1], delimiter=',')
 np.savetxt('Results\Tgs.csv', Tgs[:, 1:itnum+1], delimiter=',')
 np.savetxt('Results\Trlx.csv', Trlx[:, 1:itnum+1], delimiter=',')
 np.savetxt('Results\err.csv', err[:, 1:itnum+1], delimiter=',')
-

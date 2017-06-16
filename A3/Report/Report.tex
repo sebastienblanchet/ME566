@@ -48,14 +48,24 @@
 % for proper figures placement
 \usepackage{float}
 % for properly formated section begining
-\usepackage{titlesec}
-\titleformat{\chapter}{\bf\normalfont\huge}{\bf\thechapter.}{20pt}{\huge \bf}
+\usepackage[compact]{titlesec}
+\titleformat{\chapter}{\bf\normalfont\large}{\bf\thechapter.}{18pt}{\bf\large}
+% default spacing for header is 50 pt before, 40 pt after
+\titlespacing*{\chapter}{0pt}{0pt}{12pt}
 % for appendices
 \usepackage[toc,page]{appendix}
 % for pdf import
 \usepackage{pdfpages}
-
+% matrix
 \usepackage{amsmath}
+
+% remove page break
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatother
+
+
 
 %%%%% --------------------------------------------------------------------------------
 %%

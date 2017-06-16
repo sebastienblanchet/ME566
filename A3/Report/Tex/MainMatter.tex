@@ -28,10 +28,10 @@ Yielding the following solution ($a \cdot T = Su$) using CDS as per \cite{assign
 	\begin{pmatrix} 5064	\\	5000	\\	2564	\\ 2500 \end{pmatrix}	
 \end{equation*}
 
-The coefficient matrix $a$ and source term vector $Su$ are used next to solve the system of equations iteratively using three different indirect methods.
+The coefficient matrix $a$ and source term vector $Su$ are used next to solve the system of equations iteratively using three different indirect methods. \\
 
 %-----------------------------------------------------------------------------------------------------------------
-%% Section 2 : Jacobi
+%%% Section 2 : Jacobi
 \chapter{Jacobi Method}
 \label{chap:jacobi}
 
@@ -48,17 +48,19 @@ The results for $k=3$ iterations are shown below in Table~\ref{tab:jac}.
   \centering
   \caption{Results for $k=3$ iterations using JM.}
     \begin{tabular}{cccc}
+    \hline
     & \textbf{$k=1$} & \textbf{$k=2$} & \textbf{$k=3$} \\
     \midrule
     \textbf{$T_1$} & 64.4275 & 75.1353 & 81.7670 \\
     \textbf{$T_2$} & 65.2742 & 77.2717 & 84.6706 \\
     \textbf{$T_3$} & 32.6209 & 53.2792 & 56.7968 \\
     \textbf{$T_4$} & 32.6371 & 54.6220 & 58.9692 \\
+    \hline
     \end{tabular}
   \label{tab:jac}
 \end{table}
 
-After three iterations, the JM yields results $\approx 2-3 \deg$C from the exact solution provided in \cite{assign}. This error will be computed in Section~\ref{chap:error}.
+After three iterations, the JM yields results $\approx 2-3 \deg$C from the exact solution provided in \cite{assign}. This error will be computed in Section~\ref{chap:error}. \\
 
 %-----------------------------------------------------------------------------------------------------------------
 %% Section 3 : GS
@@ -78,17 +80,19 @@ Results for all $k=3$ iterations are summarized in Table~\ref{tab:gs} below.
   \centering
   \caption{Results for $k=3$ iterations using GS.}
     \begin{tabular}{cccc}
+    \hline
           & $k=1$ & $k=2$ & $k=3$ \\
     \midrule
     $T_1$ & 1.0000 & 1.0000 & 1.0000 \\
     $T_2$ & 1.0000 & 1.0000 & 1.0000 \\
     $T_3$ & 1.0000 & 1.0000 & 1.0000 \\
     $T_4$ & 1.0000 & 1.0000 & 1.0000 \\
+    \hline
     \end{tabular}
   \label{tab:gs}
 \end{table}
 
-Relative to the method previously used, these results are.
+Relative to the method previously used, these results are. \\
 
 %-----------------------------------------------------------------------------------------------------------------
 %% Section 4 : Relax
@@ -110,12 +114,14 @@ Again, results for each iteration are summarized below (see Table~\ref{tab:rm}).
   \centering
   \caption{Results for $k=3$ iterations using RM.}
     \begin{tabular}{cccc}
+    \hline
           & $k=1$ & $k=2$ & $k=3$ \\
     \midrule
     $T_1$ & 1.0000 & 1.0000 & 1.0000 \\
     $T_2$ & 1.0000 & 1.0000 & 1.0000 \\
     $T_3$ & 1.0000 & 1.0000 & 1.0000 \\
     $T_4$ & 1.0000 & 1.0000 & 1.0000 \\
+    \hline
     \end{tabular}
   \label{tab:rm}
 \end{table}
@@ -140,13 +146,16 @@ Where $T_1 = 83.8295, T_2 = 87.3921, T_3 = 59.6018, T_4 = 62.4042$. The error $e
   \centering
   \caption{Errors for each iterative method.}
     \begin{tabular}{c|c}
+    \hline
     $e_{JM}$ 	& 11.0240 \\
     $e_{GSM}$ 	& 0.751X \\
     $e_{RM}$ 	& 0.130X \\
+    \hline
     \end{tabular}
   \label{tab:err}
 \end{table}
 
-From these results, it may be concluded that the relaxation iterative method is the most efficient. The over relaxation  (i.e. $\alpha>1$) results in an accelerated GSM hence more accurate results. 
+From these results, it may be concluded that the relaxation iterative method is the most efficient. The over relaxation  (i.e. $\alpha>1$) results in an accelerated GSM hence more accurate results. \\
+
 
 

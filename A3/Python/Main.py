@@ -46,10 +46,10 @@ a[3, 3] = (Dx + Fx / 2) * Ax + (3 * Dy * Ay)
 
 
 # Initialize solutions
-relax, Nmax = 1.1, 100
+relax, Nmax = 1.1, 3
 Tj = np.zeros((n, Nmax))
 Tgs = np.zeros((n, Nmax))
-Trlx= np.zeros((n, Nmax))
+Trlx = np.zeros((n, Nmax))
 Sumj = np.zeros((n, Nmax))
 Sumgs1 = np.zeros((n, Nmax))
 Sumgs2 = np.zeros((n, Nmax))
@@ -74,7 +74,7 @@ for k in range(1, Nmax):
             Trlx[i, k] = relax*Tgs[i, k] + (1-relax)*Trlx[i, k-1]
 
 # Get exact solution
-Tex = Tj[:, Nmax-1]
+Tex = Tgs[:, Nmax-1]
 
 # Compute errors
 err = np.zeros((3, 1))

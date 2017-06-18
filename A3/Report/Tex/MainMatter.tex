@@ -5,14 +5,14 @@
 \chapter{Introduction}
 \label{chap:intro}
 
-As per \cite{assign}, Equation~\ref{eq:Gov} is presented as follows:
+As per \cite{assign}, the 2D convection-diffusion equation is presented as Equation~\ref{eq:Gov}.
 
 \begin{equation}
 	\label{eq:Gov}	
 	\frac{\partial(uT)}{\partial x} + \frac{\partial(vT)}{\partial y}= \frac{\partial}{\partial x} \left( \alpha \frac{\partial T}{\partial x} \right) + \frac{\partial}{\partial y} \left( \alpha \frac{\partial T}{\partial y} \right)
 \end{equation}
 
-Yielding the following solution ($a \cdot T = Su$) using CDS as per \cite{assign} and previously completed assignment.
+Applying a central differencing scheme on the discretized domain with given parameters ($\alpha = 5\ \Unit{m^2/s}, u=12\ \Unit{m/s}$) yields the following system of equations in matrix format ($a \cdot T = Su$) \cite{assign}.
 
 %equation * creates no number
 \begin{equation*}
@@ -28,21 +28,21 @@ Yielding the following solution ($a \cdot T = Su$) using CDS as per \cite{assign
 	\begin{pmatrix} 5064	\\	5000	\\	2564	\\ 2500 \end{pmatrix}	
 \end{equation*}
 
-The coefficient matrix $a$ and source term vector $Su$ are used next to solve the system of equations iteratively using three different indirect methods. \\
+The coefficient matrix $a$ and source term vector $Su$ are used next to solve this system of equations iteratively using three different indirect methods. \\
 
 %-----------------------------------------------------------------------------------------------------------------
 %%% Section 2 : Jacobi
 \chapter{Jacobi Method}
 \label{chap:jacobi}
 
-Assuming the initial guesses $k=0$ for values of T are zero (i.e. $T_1^0=T_2^0=T_3^0=T_4^0=0$), the Jacobi Method (JM) algorithm in Equation~\ref{eq:jacobi} \cite{cfdbook} is implemented numerically (see script \cite{python} in Appendix).
+First, assuming that the initial guesses ($k=0$) for temperature values of $T$ are zero (i.e. $T_1^0=T_2^0=T_3^0=T_4^0=0$), the Jacobi Method (JM) algorithm in Equation~\ref{eq:jacobi} \cite{cfdbook} is implemented numerically (see script \cite{python} in Appendix).
 
 \begin{equation}
 	\label{eq:jacobi}	
 	T_i^k = \frac{1}{a_{ii}} \left( \sum_{j=1, j \neq i}^{n} - a_{ij} T_j^{k-1}  + Su_i \right)
 \end{equation}
 
-The results for $k=3$ iterations are shown below in Table~\ref{tab:jac}.
+The results for $k=3$ iterations are shown below in Table~\ref{tab:jac}. Please note all results presented in this foregoing write-up are in degrees Celsius.
 
 \begin{table}[H]
   \centering
@@ -60,21 +60,21 @@ The results for $k=3$ iterations are shown below in Table~\ref{tab:jac}.
   \label{tab:jac}
 \end{table}
 
-After three iterations, the JM yields results $\approx 2-3 \deg$C from the exact solution provided in \cite{assign}. This error will be computed in Section~\ref{chap:error}. \\
+After three iterations, the JM yields results $\approx 2-3 \Unit{^o C}$ from the exact solution provided in \cite{assign}. This total error will be computed and discussed in Section~\ref{chap:error}. \\
 
 %-----------------------------------------------------------------------------------------------------------------
 %% Section 3 : GS
 \chapter{Gauss-Seidel Method}
 \label{chap:gauss}
 
-The Gauss-Seidel Method (GSM) is impleted with the algorithm in Equation~\ref{eq:gs} \cite{cfdbook}. This is implement in the script found in the Appendix.
+Next, the Gauss-Seidel Method (GSM) is impleted with the algorithm in Equation~\ref{eq:gs} \cite{cfdbook}.
 
 \begin{equation}
 	\label{eq:gs}	
 	T_i^k = \frac{1}{a_{ii}} \left( \sum_{j=1}^{i-1} - a_{ij} T_j^k  + \sum_{j=i+1}^{n} - a_{ij} T_j^{k-1} + Su_i \right)
 \end{equation}
 
-Results for all $k=3$ iterations are summarized in Table~\ref{tab:gs} below.
+Implementation of the above equation in \cite{python}(see Appendix) for $k=3$ iterations yields results in Table~\ref{tab:gs} below.
 
 \begin{table}[H]
   \centering
@@ -83,16 +83,16 @@ Results for all $k=3$ iterations are summarized in Table~\ref{tab:gs} below.
     \hline
           & $k=1$ & $k=2$ & $k=3$ \\
     \midrule
-    $T_1$ & 1.0000 & 1.0000 & 1.0000 \\
-    $T_2$ & 1.0000 & 1.0000 & 1.0000 \\
-    $T_3$ & 1.0000 & 1.0000 & 1.0000 \\
-    $T_4$ & 1.0000 & 1.0000 & 1.0000 \\
+    $T_1$ & 64.4275 & 81.7480 & 83.6038 \\
+    $T_2$ & 66.6199 & 84.7297 & 87.0614 \\
+    $T_3$ & 54.3799 & 61.4056 & 62.2824 \\
+    $T_4$ & 53.3898 & 58.9346 & 59.5294 \\
     \hline
     \end{tabular}
   \label{tab:gs}
 \end{table}
 
-Relative to the method previously used, these results are. \\
+The GS method appears to converge on the exact solution much quicker than the JM.\\
 
 %-----------------------------------------------------------------------------------------------------------------
 %% Section 4 : Relax
@@ -100,7 +100,7 @@ Relative to the method previously used, these results are. \\
 \label{chap:relax}
 
 
-The final iterative method explored in this assignement is the Relaxtion Method (RM). The algorithm in Equation~\ref{eq:rlx} \cite{cfdbook} is seen in the script from the Appendix.
+Finally, the next iterative method explored in this assignement is the Relaxtion Method (RM). The algorithm in Equation~\ref{eq:rlx} \cite{cfdbook} is implemented in the script found in the Appendix.
 
 \begin{equation}
 	\label{eq:rlx}	
@@ -108,7 +108,7 @@ The final iterative method explored in this assignement is the Relaxtion Method 
 	T_i^k = \omega T_{i_{GS}}^k +(1-\omega)T_i^{k-1}
 \end{equation}
 
-Again, results for each iteration are summarized below (see Table~\ref{tab:rm}).
+With an over-relaxation factor $\omega=1.1$, results for all three iteration are summarized below (see Table~\ref{tab:rm}).
 
 \begin{table}[H]
   \centering
@@ -117,16 +117,16 @@ Again, results for each iteration are summarized below (see Table~\ref{tab:rm}).
     \hline
           & $k=1$ & $k=2$ & $k=3$ \\
     \midrule
-    $T_1$ & 1.0000 & 1.0000 & 1.0000 \\
-    $T_2$ & 1.0000 & 1.0000 & 1.0000 \\
-    $T_3$ & 1.0000 & 1.0000 & 1.0000 \\
-    $T_4$ & 1.0000 & 1.0000 & 1.0000 \\
+    $T_1$ & 70.8702 & 85.5460 & 83.8270 \\
+    $T_2$ & 73.4299 & 88.7769 & 87.4489 \\
+    $T_3$ & 62.2627 & 62.9483 & 62.3808 \\
+    $T_4$ & 61.0271 & 60.0628 & 59.5546 \\
     \hline
     \end{tabular}
   \label{tab:rm}
 \end{table}
 
-
+It appears as though the RM converges on the exact solution quicker than both the GS and JM. A brief comparison of all these methods is found in the following section.\\
 
 %-----------------------------------------------------------------------------------------------------------------
 %% Section 5 : Error
@@ -140,7 +140,7 @@ The error term for each method is computed with Equation~\ref{eq:err} as per \ci
 	e = |T_1 - T_{1_{ex}}|+|T_2 - T_{2_{ex}}|+|T_3 - T_{3_{ex}}|+|T_4 - T_{4_{ex}}|
 \end{equation}
 
-Where $T_1 = 83.8295, T_2 = 87.3921, T_3 = 59.6018, T_4 = 62.4042$. The error $e$ was computed for the JM, GSM and RM. The results are summarized below in Table~\ref{tab:err}.
+Where $T_1 = 83.8295,\ T_2 = 87.3921,\ T_3 = 59.6018,\ T_4 = 62.4042$. The error $e$ is computed for the JM, GSM and RM. The results are summarized below in Table~\ref{tab:err}.
 
 \begin{table}[H]
   \centering
@@ -148,14 +148,11 @@ Where $T_1 = 83.8295, T_2 = 87.3921, T_3 = 59.6018, T_4 = 62.4042$. The error $e
     \begin{tabular}{c|c}
     \hline
     $e_{JM}$ 	& 11.0240 \\
-    $e_{GSM}$ 	& 0.751X \\
-    $e_{RM}$ 	& 0.130X \\
+    $e_{GSM}$ 	& 0.7511 \\
+    $e_{RM}$ 	& 0.1299 \\
     \hline
     \end{tabular}
   \label{tab:err}
 \end{table}
 
-From these results, it may be concluded that the relaxation iterative method is the most efficient. The over relaxation  (i.e. $\alpha>1$) results in an accelerated GSM hence more accurate results. \\
-
-
-
+From these results, it may be concluded that the relaxation iterative method is the most efficient. The over relaxation method (i.e. $\alpha>1$) results in an accelerated GSM hence more accurate values as a result of faster convergence. The GSM also provides good results and fast convergence because it uses the most up-to-date values \cite{cfdbook}.

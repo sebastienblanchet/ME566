@@ -1,0 +1,130 @@
+%%%%% --------------------------------------------------------------------------------
+%%
+%%                               Document Template
+%%
+%%%%% --------------------------------------------------------------------------------
+%% FORKED GITHUB PROJECT:
+%% MODIFIED BY SEBASTIEN BLANCHET JUNE 2017
+%%%%% --------------------------------------------------------------------------------
+%%
+%%%%************************ Document Class Declaration ******************************
+%%
+\documentclass[singlesided]{Style/uwaterloothesis}% thesis template of University of Waterloo
+%% Multiple optional arguments:
+%% [<singlesided|doublesided|printcopy>] % single-sided, double-sided, or print layout
+%% [draftversion] % show draft version information, default is no show
+%% [standard options for book class]
+%%%%% --------------------------------------------------------------------------------
+%%
+%%%%************************* Command Define and Settings ****************************
+%%
+\usepackage[list, table]{Style/commons}% common settings
+%% usage: \usepackage[option1,option2,...,optionN]{commons}
+%% Multiple optional arguments:
+%% [<numbered|authoryear|alpha>] % citation and reference style
+%% <numbered>: textual: Jones [1]; parenthetical: [1]. default style
+%% <authoryear>: textual: Jones (1995); parenthetical: (Jones, 1995)
+%% <alpha>: textual: not available; parenthetical: [Jon95]
+%% [myhdr] % one available header and footer style, will enable fancyhdr
+%% [lscape] % provide landscape layout environment
+%% [geometry] % configure page layout by geometry package
+%% [list] % enable enhanced list environments, useful for Algorithm and Coding
+%% [color] % enable color package to use color, default package is xcolor
+%% [background] % enable page background, will auto enable color package
+%% [tikz] % enable tikz for complex diagrams, will auto enbale color package
+%% [table] % enable a t able package for complex tables, default is ctable
+%% [math] % enable some extra math packages
+
+
+%% Added packages
+\usepackage{Style/custom}% user defined commands
+%% For multi line equations
+\usepackage{mathtools}
+%\usepackage{amsmath}
+%% For paragraph indentation, removes all indentation
+\usepackage{parskip}
+% for code import in appendix
+\usepackage{listings}
+% for proper figures placement
+\usepackage{float}
+% for properly formated section begining
+\usepackage{titlesec}
+\titleformat{\chapter}{\bf\normalfont\LARGE}{\bf\thechapter.}{20pt}{\LARGE\bf}
+\titlespacing*{\chapter}{0pt}{0pt}{12pt}
+\titlespacing*{\section}{0pt}{*1}{*1}
+% for appendices
+\usepackage[toc,page]{appendix}
+% for pdf import
+\usepackage{pdfpages}
+% matrix
+\usepackage{amsmath}
+
+%%%%% --------------------------------------------------------------------------------
+%%
+%%%%******************************** Content *****************************************
+%%
+\begin{document}
+%%
+%%%%% --------------------------------------------------------------------------------
+
+
+%%%%******************************** Frontmatter *************************************
+%%
+%% Frontmatter of Title page, Table of contents, Preface chapter.
+\frontmatter
+%%
+%% >>> Frontpages
+%%
+\input{Tex/Frontpages}
+%%
+%%% >>> List of Content
+%%
+%% Set TOC to record subsections
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+%% TOC LOF LOT
+\tableofcontents% contents catalog
+\intotoc{\listfigurename}% add a corresponding item to the contents table and bookmark
+\listoffigures% figures catalog
+\intotoc{\listtablename}% add a corresponding item to the contents table and bookmark
+\listoftables% tables catalog
+
+%%%%% --------------------------------------------------------------------------------
+
+%%%%******************************** Mainmatter **************************************
+%%
+%% Main topics.
+\mainmatter
+%%
+%%% >>> Main Contents
+%%
+%%
+%%% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\input{Tex/MainMatter}
+%%% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+%%%%% --------------------------------------------------------------------------------
+%%%%******************************* Backmatter ***************************************
+%%
+%% Matters of Bibliography, Glossary, Index.
+\backmatter
+%%
+%%% >>> Bibliography
+%%
+%% Need to run bibtex in compiler 
+\intotoc{\bibname}
+%% Get IEEE reference style
+\bibliographystyle{ieeetran}
+\bibliography{Biblio/Refs}
+%%
+
+%%%%******************************** Appendix ****************************************
+%%
+\cleardoublepage
+\backmatter
+\input{Tex/Appendix}
+%%%%%% --------------------------------------------------------------------------------
+
+\end{document}
+%%%%% --------------------------------------------------------------------------------

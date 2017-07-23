@@ -22,32 +22,45 @@ sim.ref.x90y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\ref\x90y.csv');
 sim.ref.y0x.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\ref\y0x.csv');
 
 % Process
+%T
+Tcol = 1;
+sim.ref.T.yvect = linspace(0,H/2000,10);
+sim.ref.T.x087y = sim.ref.x087y.data(:,Tcol);
+sim.ref.T.x0y = sim.ref.x0y.data(:,Tcol);
+sim.ref.T.x16y = sim.ref.x16y.data(:,Tcol);
+sim.ref.T.x25y = sim.ref.x25y.data(:,Tcol);
+sim.ref.T.x40y = sim.ref.x40y.data(:,Tcol);
+sim.ref.T.x90y = sim.ref.x90y.data(:,Tcol);
+
 % k
+kcol = 2;
 sim.ref.k.yvect = linspace(0,H/2000,10);
-sim.ref.k.x087y = sim.ref.x087y.data(:,1);
-sim.ref.k.x0y = sim.ref.x0y.data(:,1);
-sim.ref.k.x16y = sim.ref.x16y.data(:,1);
-sim.ref.k.x25y = sim.ref.x25y.data(:,1);
-sim.ref.k.x40y = sim.ref.x40y.data(:,1);
-sim.ref.k.x90y = sim.ref.x90y.data(:,1);
+sim.ref.k.x087y = sim.ref.x087y.data(:,kcol);
+sim.ref.k.x0y = sim.ref.x0y.data(:,kcol);
+sim.ref.k.x16y = sim.ref.x16y.data(:,kcol);
+sim.ref.k.x25y = sim.ref.x25y.data(:,kcol);
+sim.ref.k.x40y = sim.ref.x40y.data(:,kcol);
+sim.ref.k.x90y = sim.ref.x90y.data(:,kcol);
 
 % u
+ucol = 3;
 sim.ref.u.yvect = linspace(0,H/2000,10);
-sim.ref.u.x087y = sim.ref.x087y.data(:,2);
-sim.ref.u.x0y = sim.ref.x0y.data(:,2);
-sim.ref.u.x16y = sim.ref.x16y.data(:,2);
-sim.ref.u.x25y = sim.ref.x25y.data(:,2);
-sim.ref.u.x40y = sim.ref.x40y.data(:,2);
-sim.ref.u.x90y = sim.ref.x90y.data(:,2);
+sim.ref.u.x087y = sim.ref.x087y.data(:,ucol);
+sim.ref.u.x0y = sim.ref.x0y.data(:,ucol);
+sim.ref.u.x16y = sim.ref.x16y.data(:,ucol);
+sim.ref.u.x25y = sim.ref.x25y.data(:,ucol);
+sim.ref.u.x40y = sim.ref.x40y.data(:,ucol);
+sim.ref.u.x90y = sim.ref.x90y.data(:,ucol);
 
 % v
+vcol = 4;
 sim.ref.v.yvect = linspace(0,H/2000,10);
-sim.ref.v.x087y = sim.ref.x087y.data(:,3);
-sim.ref.v.x0y = sim.ref.x0y.data(:,3);
-sim.ref.v.x16y = sim.ref.x16y.data(:,3);
-sim.ref.v.x25y = sim.ref.x25y.data(:,3);
-sim.ref.v.x40y = sim.ref.x40y.data(:,3);
-sim.ref.v.x90y = sim.ref.x90y.data(:,3);
+sim.ref.v.x087y = sim.ref.x087y.data(:,vcol);
+sim.ref.v.x0y = sim.ref.x0y.data(:,vcol);
+sim.ref.v.x16y = sim.ref.x16y.data(:,vcol);
+sim.ref.v.x25y = sim.ref.x25y.data(:,vcol);
+sim.ref.v.x40y = sim.ref.x40y.data(:,vcol);
+sim.ref.v.x90y = sim.ref.x90y.data(:,vcol);
 
 clear sim.ref.x0y.data sim.ref.x087y.data sim.ref.x16y.data ...
     sim.ref.x25y.data sim.ref.x40y.data sim.ref.x90y.data
@@ -91,9 +104,9 @@ exp.k.x40y= expref(table2, xstr40, 8);
 exp.k.x90y = expref(table2, xstr90, 8);
 
 % Plots
-% plotexpy2(sim.ref.u, exp.u, 1, 'u', '$u$ [m/s]')
-% plotexpy2(sim.ref.v, exp.v, 2, 'v', '$v$ [m/s]')
-% plotexpy2(sim.ref.k, exp.k, 3, 'k','$k$ [m$^2$/s$^2$]')
+plotexpy2(sim.ref.u, exp.u, 1, 'u', '$u$ [m/s]')
+plotexpy2(sim.ref.v, exp.v, 2, 'v', '$v$ [m/s]')
+plotexpy2(sim.ref.k, exp.k, 3, 'k','$k$ [m$^2$/s$^2$]')
 
 
 %% Compare sims
@@ -107,31 +120,45 @@ sim.model1.x90y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model1\x90y.
 sim.model1.y0x.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model1\y0x.csv');
 
 % Process
+%T
+Tcol=4;
+sim.model1.T.yvect = linspace(0,H/2000,10);
+sim.model1.T.x087y = sim.model1.x087y.data(:,Tcol);
+sim.model1.T.x0y = sim.model1.x0y.data(:,Tcol);
+sim.model1.T.x16y = sim.model1.x16y.data(:,Tcol);
+sim.model1.T.x25y = sim.model1.x25y.data(:,Tcol);
+sim.model1.T.x40y = sim.model1.x40y.data(:,Tcol);
+sim.model1.T.x90y = sim.model1.x90y.data(:,Tcol);
+
+%k
+kcol=5;
 sim.model1.k.yvect = linspace(0,H/2000,10);
-sim.model1.k.x087y = sim.model1.x087y.data(:,4);
-sim.model1.k.x0y = sim.model1.x0y.data(:,4);
-sim.model1.k.x16y = sim.model1.x16y.data(:,4);
-sim.model1.k.x25y = sim.model1.x25y.data(:,4);
-sim.model1.k.x40y = sim.model1.x40y.data(:,4);
-sim.model1.k.x90y = sim.model1.x90y.data(:,4);
+sim.model1.k.x087y = sim.model1.x087y.data(:,kcol);
+sim.model1.k.x0y = sim.model1.x0y.data(:,kcol);
+sim.model1.k.x16y = sim.model1.x16y.data(:,kcol);
+sim.model1.k.x25y = sim.model1.x25y.data(:,kcol);
+sim.model1.k.x40y = sim.model1.x40y.data(:,kcol);
+sim.model1.k.x90y = sim.model1.x90y.data(:,kcol);
 
 % u
+ucol = 6;
 sim.model1.u.yvect = linspace(0,H/2000,10);
-sim.model1.u.x087y = sim.model1.x087y.data(:,5);
-sim.model1.u.x0y = sim.model1.x0y.data(:,5);
-sim.model1.u.x16y = sim.model1.x16y.data(:,5);
-sim.model1.u.x25y = sim.model1.x25y.data(:,5);
-sim.model1.u.x40y = sim.model1.x40y.data(:,5);
-sim.model1.u.x90y = sim.model1.x90y.data(:,5);
+sim.model1.u.x087y = sim.model1.x087y.data(:,ucol);
+sim.model1.u.x0y = sim.model1.x0y.data(:,ucol);
+sim.model1.u.x16y = sim.model1.x16y.data(:,ucol);
+sim.model1.u.x25y = sim.model1.x25y.data(:,ucol);
+sim.model1.u.x40y = sim.model1.x40y.data(:,ucol);
+sim.model1.u.x90y = sim.model1.x90y.data(:,ucol);
 
 % v
+vcol =7;
 sim.model1.v.yvect = linspace(0,H/2000,10);
-sim.model1.v.x087y = sim.model1.x087y.data(:,6);
-sim.model1.v.x0y = sim.model1.x0y.data(:,6);
-sim.model1.v.x16y = sim.model1.x16y.data(:,6);
-sim.model1.v.x25y = sim.model1.x25y.data(:,6);
-sim.model1.v.x40y = sim.model1.x40y.data(:,6);
-sim.model1.v.x90y = sim.model1.x90y.data(:,6);
+sim.model1.v.x087y = sim.model1.x087y.data(:,vcol);
+sim.model1.v.x0y = sim.model1.x0y.data(:,vcol);
+sim.model1.v.x16y = sim.model1.x16y.data(:,vcol);
+sim.model1.v.x25y = sim.model1.x25y.data(:,vcol);
+sim.model1.v.x40y = sim.model1.x40y.data(:,vcol);
+sim.model1.v.x90y = sim.model1.x90y.data(:,vcol);
 
 clear model1.ref.x0y.data model1.ref.x087y.data model1.ref.x16y.data ...
     model1.ref.x25y.data model1.ref.x40y.data model1.ref.x90y.data
@@ -147,40 +174,55 @@ sim.model2.x90y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model2\x90y.
 sim.model2.y0x.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model2\y0x.csv');
 
 % Process
-% k
+%T
+Tcol=4;
+sim.model2.T.yvect = linspace(0,H/2000,10);
+sim.model2.T.x087y = sim.model2.x087y.data(:,Tcol);
+sim.model2.T.x0y = sim.model2.x0y.data(:,Tcol);
+sim.model2.T.x16y = sim.model2.x16y.data(:,Tcol);
+sim.model2.T.x25y = sim.model2.x25y.data(:,Tcol);
+sim.model2.T.x40y = sim.model2.x40y.data(:,Tcol);
+sim.model2.T.x90y = sim.model2.x90y.data(:,Tcol);
+
+%k
+kcol=5;
 sim.model2.k.yvect = linspace(0,H/2000,10);
-sim.model2.k.x087y = sim.model2.x087y.data(:,4);
-sim.model2.k.x0y = sim.model2.x0y.data(:,4);
-sim.model2.k.x16y = sim.model2.x16y.data(:,4);
-sim.model2.k.x25y = sim.model2.x25y.data(:,4);
-sim.model2.k.x40y = sim.model2.x40y.data(:,4);
-sim.model2.k.x90y = sim.model2.x90y.data(:,4);
+sim.model2.k.x087y = sim.model2.x087y.data(:,kcol);
+sim.model2.k.x0y = sim.model2.x0y.data(:,kcol);
+sim.model2.k.x16y = sim.model2.x16y.data(:,kcol);
+sim.model2.k.x25y = sim.model2.x25y.data(:,kcol);
+sim.model2.k.x40y = sim.model2.x40y.data(:,kcol);
+sim.model2.k.x90y = sim.model2.x90y.data(:,kcol);
 
 % u
+ucol = 6;
 sim.model2.u.yvect = linspace(0,H/2000,10);
-sim.model2.u.x087y = sim.model2.x087y.data(:,5);
-sim.model2.u.x0y = sim.model2.x0y.data(:,5);
-sim.model2.u.x16y = sim.model2.x16y.data(:,5);
-sim.model2.u.x25y = sim.model2.x25y.data(:,5);
-sim.model2.u.x40y = sim.model2.x40y.data(:,5);
-sim.model2.u.x90y = sim.model2.x90y.data(:,5);
+sim.model2.u.x087y = sim.model2.x087y.data(:,ucol);
+sim.model2.u.x0y = sim.model2.x0y.data(:,ucol);
+sim.model2.u.x16y = sim.model2.x16y.data(:,ucol);
+sim.model2.u.x25y = sim.model2.x25y.data(:,ucol);
+sim.model2.u.x40y = sim.model2.x40y.data(:,ucol);
+sim.model2.u.x90y = sim.model2.x90y.data(:,ucol);
 
 % v
+vcol =7;
 sim.model2.v.yvect = linspace(0,H/2000,10);
-sim.model2.v.x087y = sim.model2.x087y.data(:,6);
-sim.model2.v.x0y = sim.model2.x0y.data(:,6);
-sim.model2.v.x16y = sim.model2.x16y.data(:,6);
-sim.model2.v.x25y = sim.model2.x25y.data(:,6);
-sim.model2.v.x40y = sim.model2.x40y.data(:,6);
-sim.model2.v.x90y = sim.model2.x90y.data(:,6);
+sim.model2.v.x087y = sim.model2.x087y.data(:,vcol);
+sim.model2.v.x0y = sim.model2.x0y.data(:,vcol);
+sim.model2.v.x16y = sim.model2.x16y.data(:,vcol);
+sim.model2.v.x25y = sim.model2.x25y.data(:,vcol);
+sim.model2.v.x40y = sim.model2.x40y.data(:,vcol);
+sim.model2.v.x90y = sim.model2.x90y.data(:,vcol);
 
 clear model2.ref.x0y.data model2.ref.x087y.data model2.ref.x16y.data ...
     model2.ref.x25y.data model2.ref.x40y.data model2.ref.x90y.data
 
 % Plots
-% plotexpy3(sim.ref.u, sim.model1.u, sim.model2.u, 4, 'u', '$u$ [m/s]')
-% plotexpy3(sim.ref.v, sim.model1.v, sim.model2.v, 5, 'v', '$v$ [m/s]')
-% plotexpy3(sim.ref.k, sim.model1.k, sim.model2.k, 6, 'k','$k$ [m$^2$/s$^2$]')
+plotexpy3(sim.ref.u, sim.model1.u, sim.model2.u, 4, 'u', '$u$ [m/s]')
+plotexpy3(sim.ref.v, sim.model1.v, sim.model2.v, 5, 'v', '$v$ [m/s]')
+plotexpy3(sim.ref.k, sim.model1.k, sim.model2.k, 6, 'k','$k$ [m$^2$/s$^2$]')
+plotexpy3(sim.ref.T, sim.model1.T, sim.model2.T, 7, 'T','$T$ [$^{\circ}$C]')
+
 
 %% Compare along x
 
@@ -202,7 +244,7 @@ sim.model2.T = sim.model2.y0x.data(:,4);
 sim.model2.k = sim.model2.y0x.data(:,5);
 sim.model2.V = sim.model2.y0x.data(:,6);
 
-figure(1)
+figure(8)
 hold on 
 plot(sim.ref.x, sim.ref.T-273.15, '*-')
 plot(sim.model1.x, sim.model1.T-273.15, 'o-')
@@ -215,7 +257,7 @@ plotstr=strcat('Plots\sim2_comp_T');
 plotstr=char(plotstr);
 print(1,'-djpeg',plotstr);
 
-figure(2)
+figure(9)
 hold on 
 plot(sim.ref.x, sim.ref.k, '*-')
 plot(sim.model1.x, sim.model1.k, 'o-')
@@ -228,7 +270,7 @@ plotstr=strcat('Plots\sim2_comp_k');
 plotstr=char(plotstr);
 print(2,'-djpeg',plotstr);
 
-figure(3)
+figure(10)
 hold on 
 plot(sim.ref.x, sim.ref.V, '*-')
 plot(sim.model1.x, sim.model1.V, 'o-')
@@ -237,7 +279,5 @@ title('$$\vec{V}$$ Profile at $Y^*=0$','Interpreter','latex');
 xlabel('$X$ [m]','Interpreter','latex');
 ylabel('$$\vec{V}$$ [m/s]','Interpreter','latex');
 legend('Ref.', 'Model 1', 'Model 2')
-plotstr=strcat('Plots\sim2_comp_V');   
-plotstr=char(plotstr);
-print(3,'-djpeg',plotstr);
+print(3,'-djpeg','Plots\sim2_comp_V');
 

@@ -204,12 +204,12 @@ sim.model2.V = sim.model2.y0x.data(:,6);
 
 figure(1)
 hold on 
-plot(sim.ref.x, sim.ref.T, '*-')
-plot(sim.model1.x, sim.model1.T, 'o-')
-plot(sim.model2.x, sim.model2.T, 'x-')
+plot(sim.ref.x, sim.ref.T-273.15, '*-')
+plot(sim.model1.x, sim.model1.T-273.15, 'o-')
+plot(sim.model2.x, sim.model2.T-273.15, 'x-')
 title('$T$ Profile at $Y^*=0$','Interpreter','latex');
 xlabel('$X$ [m]','Interpreter','latex');
-ylabel('$T$ [K]','Interpreter','latex');
+ylabel('$T$ [$^{\circ}$C]','Interpreter','latex');
 legend('Ref.', 'Model 1', 'Model 2')
 plotstr=strcat('Plots\sim2_comp_T');   
 plotstr=char(plotstr);

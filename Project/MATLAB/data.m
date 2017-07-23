@@ -3,6 +3,7 @@
 
 clear; close all; clc;
 
+%% Exp ref
 % Constant parameters
 uref = 23.9;
 H = 30;
@@ -11,106 +12,162 @@ Ld = 15;
 theta1 = -20;
 theta2 = 10;
 
-% Ref raw data
-sim.ref.x0y = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\ref\x0y.csv');
-sim.ref.x16y = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\ref\x16y.csv');
-sim.ref.x40y = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\ref\x40y.csv');
-sim.ref.x90y = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\ref\x90y.csv');
-sim.ref.yvect = linspace(0,H/2000,10);
+% Ref sim data
+sim.ref.x0y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\ref\x0y.csv');
+sim.ref.x087y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\ref\x087y.csv');
+sim.ref.x16y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\ref\x16y.csv');
+sim.ref.x25y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\ref\x25y.csv');
+sim.ref.x40y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\ref\x40y.csv');
+sim.ref.x90y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\ref\x90y.csv');
+sim.ref.x0y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\ref\x0y.csv');
+
+% Process
+% k
+sim.ref.k.yvect = linspace(0,H/2000,10);
+sim.ref.k.x087y = sim.ref.x087y.data(:,1);
+sim.ref.k.x0y = sim.ref.x0y.data(:,1);
+sim.ref.k.x16y = sim.ref.x16y.data(:,1);
+sim.ref.k.x25y = sim.ref.x25y.data(:,1);
+sim.ref.k.x40y = sim.ref.x40y.data(:,1);
+sim.ref.k.x90y = sim.ref.x90y.data(:,1);
+
+% u
+sim.ref.u.yvect = linspace(0,H/2000,10);
+sim.ref.u.x087y = sim.ref.x087y.data(:,2);
+sim.ref.u.x0y = sim.ref.x0y.data(:,2);
+sim.ref.u.x16y = sim.ref.x16y.data(:,2);
+sim.ref.u.x25y = sim.ref.x25y.data(:,2);
+sim.ref.u.x40y = sim.ref.x40y.data(:,2);
+sim.ref.u.x90y = sim.ref.x90y.data(:,2);
+
+% v
+sim.ref.v.yvect = linspace(0,H/2000,10);
+sim.ref.v.x087y = sim.ref.x087y.data(:,3);
+sim.ref.v.x0y = sim.ref.x0y.data(:,3);
+sim.ref.v.x16y = sim.ref.x16y.data(:,3);
+sim.ref.v.x25y = sim.ref.x25y.data(:,3);
+sim.ref.v.x40y = sim.ref.x40y.data(:,3);
+sim.ref.v.x90y = sim.ref.x90y.data(:,3);
+
+clear sim.ref.x0y.data sim.ref.x087y.data sim.ref.x16y.data ...
+    sim.ref.x25y.data sim.ref.x40y.data sim.ref.x90y.data
 
 xstr0 =0;
-xstr16= 1.6*H/1000;
+xstr087 = -0.87*Ld/1000;
+xstr16 = 1.6*H/1000;
+xstr25 = 2.5*H/1000;
 xstr40 = 4*H/1000;
 xstr90 = 9*H/1000;
 
+% Experimental data import
 table2 = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\ref\ref_exp.csv');
 
-exp.y =table2(((table2(:,2) == xstr0) & (table2(:,1)>=0)));
-exp.x0y = table2(((table2(:,2) == xstr0) & (table2(:,1)>=0)),3);
-exp.x16y = table2(((table2(:,2) == xstr16) & (table2(:,1)>=0)),3);
-exp.x40y = table2(((table2(:,2) == xstr40) & (table2(:,1)>=0)),3);
-exp.x90y = table2(((table2(:,2) == xstr90) & (table2(:,1)>=0)),3);
+% Process data
+% u
+exp.u.y =table2(((table2(:,2) == xstr0) & (table2(:,1)>=0)));
+exp.u.x0y = expref(table2, xstr0, 3);
+exp.u.x087y = expref(table2, xstr087, 3);
+exp.u.x16y = expref(table2, xstr16, 3);
+exp.u.x25y = expref(table2, xstr25, 3);
+exp.u.x40y = expref(table2, xstr40, 3);
+exp.u.x90y = expref(table2, xstr90, 3);
 
-% Velocity u
-figure(1)
-subplot(2,2,1)
-hold on 
-plot(sim.ref.x0y(:,2), sim.ref.yvect, '*-')
-plot(exp.x0y, exp.y, 'o-')
-title('$u$ Profile at $X^*=0$','Interpreter','latex');
-xlabel('$X$ [m/s]','Interpreter','latex');
-ylabel('$Y$ [m]','Interpreter','latex');
-legend('Sim.', 'Exp.'),
-
-subplot(2,2,2)
-hold on 
-plot(sim.ref.x16y(:,2), sim.ref.yvect, '*-')
-plot(exp.x16y, exp.y, 'o-')
-title('$u$ Profile at $X^*=1.6$','Interpreter','latex');
-xlabel('$X$ [m/s]','Interpreter','latex');
-ylabel('$Y$ [m]','Interpreter','latex');
-legend('Sim.', 'Exp.'),
-
-subplot(2,2,3)
-hold on 
-plot(sim.ref.x40y(:,2), sim.ref.yvect, '*-')
-plot(exp.x40y, exp.y, 'o-')
-title('$u$ Profile at $X^*=4$','Interpreter','latex');
-xlabel('$X$ [m/s]','Interpreter','latex');
-ylabel('$Y$ [m]','Interpreter','latex');
-legend('Sim.', 'Exp.'),
-
-subplot(2,2,4)
-hold on 
-plot(sim.ref.x90y(:,2), sim.ref.yvect, '*-')
-plot(exp.x90y, exp.y, 'o-')
-title('$u$ Profile at $X^*=9$','Interpreter','latex');
-xlabel('$X$ [m/s]','Interpreter','latex');
-ylabel('$Y$ [m]','Interpreter','latex');
-legend('Sim.', 'Exp.'),
-print(1,'-djpeg','Plots/ref_u_all');
-
+% v
+exp.v.y =table2(((table2(:,2) == xstr0) & (table2(:,1)>=0)));
+exp.v.x0y = expref(table2, xstr0, 4);
+exp.v.x087y = expref(table2, xstr087, 4);
+exp.v.x16y = expref(table2, xstr16, 4);
+exp.v.x25y = expref(table2, xstr25, 4);
+exp.v.x40y = expref(table2, xstr40, 4);
+exp.v.x90y = expref(table2, xstr90, 4);
 
 % k
-exp.x0yk = table2(((table2(:,2) == xstr0) & (table2(:,1)>=0)),8);
-exp.x16yk = table2(((table2(:,2) == xstr16) & (table2(:,1)>=0)),8);
-exp.x40yk = table2(((table2(:,2) == xstr40) & (table2(:,1)>=0)),8);
-exp.x90yk = table2(((table2(:,2) == xstr90) & (table2(:,1)>=0)),8);
+exp.k.y =table2(((table2(:,2) == xstr0) & (table2(:,1)>=0)));
+exp.k.x0y = expref(table2, xstr0, 8);
+exp.k.x087y = expref(table2, xstr087, 8);
+exp.k.x16y = expref(table2, xstr16, 8);
+exp.k.x25y= expref(table2, xstr25, 8);
+exp.k.x40y= expref(table2, xstr40, 8);
+exp.k.x90y = expref(table2, xstr90, 8);
 
-figure(2)
-subplot(2,2,1)
-hold on 
-plot(sim.ref.x0y(:,1), sim.ref.yvect, '*-')
-plot(exp.x0yk, exp.y, 'o-')
-title('$k$ Profile at $X^*=0$','Interpreter','latex');
-xlabel('$k$ [m$^2$/s$^2$]','Interpreter','latex');
-ylabel('$Y$ [m]','Interpreter','latex');
-legend('Sim.', 'Exp.'),
+% Plots
+plotexpy2(sim.ref.u, exp.u, 1, 'u', '$u$ [m/s]')
+plotexpy2(sim.ref.v, exp.v, 2, 'v', '$v$ [m/s]')
+plotexpy2(sim.ref.k, exp.k, 3, 'k','$k$ [m$^2$/s$^2$]')
 
-subplot(2,2,2)
-hold on 
-plot(sim.ref.x16y(:,1), sim.ref.yvect, '*-')
-plot(exp.x16yk, exp.y, 'o-')
-title('$k$ Profile at $X^*=1.6$','Interpreter','latex');
-xlabel('$k$ [m$^2$/s$^2$]','Interpreter','latex');
-ylabel('$Y$ [m]','Interpreter','latex');
-legend('Sim.', 'Exp.'),
 
-subplot(2,2,3)
-hold on 
-plot(sim.ref.x40y(:,1), sim.ref.yvect, '*-')
-plot(exp.x40yk, exp.y, 'o-')
-title('$k$ Profile at $X^*=4$','Interpreter','latex');
-xlabel('$k$ [m$^2$/s$^2$]','Interpreter','latex');
-ylabel('$Y$ [m]','Interpreter','latex');
-legend('Sim.', 'Exp.'),
+%% Compare sims
+% model1 sim data
+sim.model1.x0y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model1\x0y.csv');
+sim.model1.x087y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model1\x087y.csv');
+sim.model1.x16y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model1\x16y.csv');
+sim.model1.x25y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model1\x25y.csv');
+sim.model1.x40y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model1\x40y.csv');
+sim.model1.x90y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model1\x90y.csv');
+sim.model1.x0y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model1\x0y.csv');
 
-subplot(2,2,4)
-hold on 
-plot(sim.ref.x90y(:,1), sim.ref.yvect, '*-')
-plot(exp.x90yk, exp.y, 'o-')
-title('$k$ Profile at $X^*=9$','Interpreter','latex');
-xlabel('$k$ [m$^2$/s$^2$]','Interpreter','latex');
-ylabel('$Y$ [m]','Interpreter','latex');
-legend('Sim.', 'Exp.'),
-print(2,'-djpeg','Plots/ref_k_all');
+% Process
+% k
+sim.model1.k.yvect = linspace(0,H/2000,10);
+sim.model1.k.x087y = sim.model1.x087y.data(:,1);
+sim.model1.k.x0y = sim.model1.x0y.data(:,1);
+sim.model1.k.x16y = sim.model1.x16y.data(:,1);
+sim.model1.k.x25y = sim.model1.x25y.data(:,1);
+sim.model1.k.x40y = sim.model1.x40y.data(:,1);
+sim.model1.k.x90y = sim.model1.x90y.data(:,1);
+
+% u
+sim.model1.u.yvect = linspace(0,H/2000,10);
+sim.model1.u.x087y = sim.model1.x087y.data(:,2);
+sim.model1.u.x0y = sim.model1.x0y.data(:,2);
+sim.model1.u.x16y = sim.model1.x16y.data(:,2);
+sim.model1.u.x25y = sim.model1.x25y.data(:,2);
+sim.model1.u.x40y = sim.model1.x40y.data(:,2);
+sim.model1.u.x90y = sim.model1.x90y.data(:,2);
+
+% v
+sim.model1.v.yvect = linspace(0,H/2000,10);
+sim.model1.v.x087y = sim.model1.x087y.data(:,3);
+sim.model1.v.x0y = sim.model1.x0y.data(:,3);
+sim.model1.v.x16y = sim.model1.x16y.data(:,3);
+sim.model1.v.x25y = sim.model1.x25y.data(:,3);
+sim.model1.v.x40y = sim.model1.x40y.data(:,3);
+sim.model1.v.x90y = sim.model1.x90y.data(:,3);
+
+% model2 sim data
+sim.model2.x0y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model2\x0y.csv');
+sim.model2.x087y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model2\x087y.csv');
+sim.model2.x16y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model2\x16y.csv');
+sim.model2.x25y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model2\x25y.csv');
+sim.model2.x40y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model2\x40y.csv');
+sim.model2.x90y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model2\x90y.csv');
+sim.model2.x0y.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model2\x0y.csv');
+
+% Process
+% k
+sim.model2.k.yvect = linspace(0,H/2000,10);
+sim.model2.k.x087y = sim.model2.x087y.data(:,1);
+sim.model2.k.x0y = sim.model2.x0y.data(:,1);
+sim.model2.k.x16y = sim.model2.x16y.data(:,1);
+sim.model2.k.x25y = sim.model2.x25y.data(:,1);
+sim.model2.k.x40y = sim.model2.x40y.data(:,1);
+sim.model2.k.x90y = sim.model2.x90y.data(:,1);
+
+% u
+sim.model2.u.yvect = linspace(0,H/2000,10);
+sim.model2.u.x087y = sim.model2.x087y.data(:,2);
+sim.model2.u.x0y = sim.model2.x0y.data(:,2);
+sim.model2.u.x16y = sim.model2.x16y.data(:,2);
+sim.model2.u.x25y = sim.model2.x25y.data(:,2);
+sim.model2.u.x40y = sim.model2.x40y.data(:,2);
+sim.model2.u.x90y = sim.model2.x90y.data(:,2);
+
+% v
+sim.model2.v.yvect = linspace(0,H/2000,10);
+sim.model2.v.x087y = sim.model2.x087y.data(:,3);
+sim.model2.v.x0y = sim.model2.x0y.data(:,3);
+sim.model2.v.x16y = sim.model2.x16y.data(:,3);
+sim.model2.v.x25y = sim.model2.x25y.data(:,3);
+sim.model2.v.x40y = sim.model2.x40y.data(:,3);
+sim.model2.v.x90y = sim.model2.x90y.data(:,3);
+

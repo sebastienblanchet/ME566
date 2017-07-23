@@ -255,7 +255,7 @@ ylabel('$T$ [$^{\circ}$C]','Interpreter','latex');
 legend('Ref.', 'Model 1', 'Model 2')
 plotstr=strcat('Plots\sim2_comp_T');   
 plotstr=char(plotstr);
-print(1,'-djpeg',plotstr);
+print(8,'-djpeg',plotstr);
 
 figure(9)
 hold on 
@@ -268,7 +268,7 @@ ylabel('$k$ [m$^2$/s$^2$]','Interpreter','latex');
 legend('Ref.', 'Model 1', 'Model 2')
 plotstr=strcat('Plots\sim2_comp_k');   
 plotstr=char(plotstr);
-print(2,'-djpeg',plotstr);
+print(9,'-djpeg',plotstr);
 
 figure(10)
 hold on 
@@ -279,5 +279,5 @@ title('$$\vec{V}$$ Profile at $Y^*=0$','Interpreter','latex');
 xlabel('$X$ [m]','Interpreter','latex');
 ylabel('$$\vec{V}$$ [m/s]','Interpreter','latex');
 legend('Ref.', 'Model 1', 'Model 2')
-print(3,'-djpeg','Plots\sim2_comp_V');
+print(10,'-djpeg','Plots\sim2_comp_V');
 

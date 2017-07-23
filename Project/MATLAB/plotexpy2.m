@@ -19,7 +19,7 @@ function [ fig ] = plotexpy2(sim, exp, fignum, name, xname)
     title(t2,'Interpreter','latex');
     xlabel(xname,'Interpreter','latex');
     ylabel('$Y$ [m]','Interpreter','latex');
-    legend('Sim.', 'Exp.')
+%     legend('Sim.', 'Exp.')
     
     subplot(2,3,3)
     hold on 
@@ -29,7 +29,7 @@ function [ fig ] = plotexpy2(sim, exp, fignum, name, xname)
     title(t3,'Interpreter','latex');
     xlabel(xname,'Interpreter','latex');
     ylabel('$Y$ [m]','Interpreter','latex');
-    legend('Sim.', 'Exp.')
+%     legend('Sim.', 'Exp.')
     
     subplot(2,3,4)
     hold on 
@@ -39,7 +39,7 @@ function [ fig ] = plotexpy2(sim, exp, fignum, name, xname)
     title(t4,'Interpreter','latex');
     xlabel(xname,'Interpreter','latex');
     ylabel('$Y$ [m]','Interpreter','latex');
-    legend('Sim.', 'Exp.')
+%     legend('Sim.', 'Exp.')
     
     subplot(2,3,5)
     hold on 
@@ -49,7 +49,7 @@ function [ fig ] = plotexpy2(sim, exp, fignum, name, xname)
     title(t5,'Interpreter','latex');
     xlabel(xname,'Interpreter','latex');
     ylabel('$Y$ [m]','Interpreter','latex');
-    legend('Sim.', 'Exp.')
+%     legend('Sim.', 'Exp.')
     
     subplot(2,3,6)
     hold on 
@@ -59,7 +59,7 @@ function [ fig ] = plotexpy2(sim, exp, fignum, name, xname)
     title(t6,'Interpreter','latex');
     xlabel(xname,'Interpreter','latex');
     ylabel('$Y$ [m]','Interpreter','latex');
-    legend('Sim.', 'Exp.'),
+%     legend('Sim.', 'Exp.'),
     
     plotstr=strcat('Plots\exp_ref_',name);   
     plotstr=char(plotstr);

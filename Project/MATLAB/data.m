@@ -23,14 +23,15 @@ sim.ref.y0x.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\ref\y0x.csv');
 
 % Process
 %T
+Toff = -273.15;
 Tcol = 1;
 sim.ref.T.yvect = linspace(0,H/2000,10);
-sim.ref.T.x087y = sim.ref.x087y.data(:,Tcol);
-sim.ref.T.x0y = sim.ref.x0y.data(:,Tcol);
-sim.ref.T.x16y = sim.ref.x16y.data(:,Tcol);
-sim.ref.T.x25y = sim.ref.x25y.data(:,Tcol);
-sim.ref.T.x40y = sim.ref.x40y.data(:,Tcol);
-sim.ref.T.x90y = sim.ref.x90y.data(:,Tcol);
+sim.ref.T.x087y = sim.ref.x087y.data(:,Tcol)+Toff ;
+sim.ref.T.x0y = sim.ref.x0y.data(:,Tcol)+Toff ;
+sim.ref.T.x16y = sim.ref.x16y.data(:,Tcol)+Toff ;
+sim.ref.T.x25y = sim.ref.x25y.data(:,Tcol)+Toff ;
+sim.ref.T.x40y = sim.ref.x40y.data(:,Tcol)+Toff ;
+sim.ref.T.x90y = sim.ref.x90y.data(:,Tcol)+Toff ;
 
 % k
 kcol = 2;
@@ -123,12 +124,12 @@ sim.model1.y0x.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model1\y0x.cs
 %T
 Tcol=4;
 sim.model1.T.yvect = linspace(0,H/2000,10);
-sim.model1.T.x087y = sim.model1.x087y.data(:,Tcol);
-sim.model1.T.x0y = sim.model1.x0y.data(:,Tcol);
-sim.model1.T.x16y = sim.model1.x16y.data(:,Tcol);
-sim.model1.T.x25y = sim.model1.x25y.data(:,Tcol);
-sim.model1.T.x40y = sim.model1.x40y.data(:,Tcol);
-sim.model1.T.x90y = sim.model1.x90y.data(:,Tcol);
+sim.model1.T.x087y = sim.model1.x087y.data(:,Tcol)+Toff ;
+sim.model1.T.x0y = sim.model1.x0y.data(:,Tcol)+Toff ;
+sim.model1.T.x16y = sim.model1.x16y.data(:,Tcol)+Toff ;
+sim.model1.T.x25y = sim.model1.x25y.data(:,Tcol)+Toff ;
+sim.model1.T.x40y = sim.model1.x40y.data(:,Tcol)+Toff ;
+sim.model1.T.x90y = sim.model1.x90y.data(:,Tcol)+Toff ;
 
 %k
 kcol=5;
@@ -177,12 +178,12 @@ sim.model2.y0x.data = xlsread('N:\GitHub\ME566\Project\MATLAB\Data\model2\y0x.cs
 %T
 Tcol=4;
 sim.model2.T.yvect = linspace(0,H/2000,10);
-sim.model2.T.x087y = sim.model2.x087y.data(:,Tcol);
-sim.model2.T.x0y = sim.model2.x0y.data(:,Tcol);
-sim.model2.T.x16y = sim.model2.x16y.data(:,Tcol);
-sim.model2.T.x25y = sim.model2.x25y.data(:,Tcol);
-sim.model2.T.x40y = sim.model2.x40y.data(:,Tcol);
-sim.model2.T.x90y = sim.model2.x90y.data(:,Tcol);
+sim.model2.T.x087y = sim.model2.x087y.data(:,Tcol)+Toff ;
+sim.model2.T.x0y = sim.model2.x0y.data(:,Tcol)+Toff ;
+sim.model2.T.x16y = sim.model2.x16y.data(:,Tcol)+Toff ;
+sim.model2.T.x25y = sim.model2.x25y.data(:,Tcol)+Toff ;
+sim.model2.T.x40y = sim.model2.x40y.data(:,Tcol)+Toff ;
+sim.model2.T.x90y = sim.model2.x90y.data(:,Tcol)+Toff ;
 
 %k
 kcol=5;
@@ -221,7 +222,8 @@ clear model2.ref.x0y.data model2.ref.x087y.data model2.ref.x16y.data ...
 plotexpy3(sim.ref.u, sim.model1.u, sim.model2.u, 4, 'u', '$u$ [m/s]')
 plotexpy3(sim.ref.v, sim.model1.v, sim.model2.v, 5, 'v', '$v$ [m/s]')
 plotexpy3(sim.ref.k, sim.model1.k, sim.model2.k, 6, 'k','$k$ [m$^2$/s$^2$]')
-plotexpy3(sim.ref.T, sim.model1.T, sim.model2.T, 7, 'T','$T$ [$^{\circ}$C]')
+plotexpy3(sim.ref.T, sim.model1.T, sim.model2.T ...
+    , 7, 'T','$T$ [$^{\circ}$C]')
 
 
 %% Compare along x
@@ -252,10 +254,9 @@ plot(sim.model2.x, sim.model2.T-273.15, 'x-')
 title('$T$ Profile at $Y^*=0$','Interpreter','latex');
 xlabel('$X$ [m]','Interpreter','latex');
 ylabel('$T$ [$^{\circ}$C]','Interpreter','latex');
-legend('Ref.', 'Model 1', 'Model 2')
-plotstr=strcat('Plots\sim2_comp_T');   
-plotstr=char(plotstr);
-print(8,'-djpeg',plotstr);
+legend({'$\theta = 0 ^{\circ}$', '$\theta_1 = -20 ^{\circ}$', ...
+        '$\theta_2 = 10 ^{\circ}$'},'Interpreter','latex')
+print(8,'-djpeg','Plots\sim2_comp_T');
 
 figure(9)
 hold on 
@@ -265,10 +266,9 @@ plot(sim.model2.x, sim.model2.k, 'x-')
 title('$k$ Profile at $Y^*=0$','Interpreter','latex');
 xlabel('$X$ [m]','Interpreter','latex');
 ylabel('$k$ [m$^2$/s$^2$]','Interpreter','latex');
-legend('Ref.', 'Model 1', 'Model 2')
-plotstr=strcat('Plots\sim2_comp_k');   
-plotstr=char(plotstr);
-print(9,'-djpeg',plotstr);
+legend({'$\theta = 0 ^{\circ}$', '$\theta_1 = -20 ^{\circ}$', ...
+        '$\theta_2 = 10 ^{\circ}$'},'Interpreter','latex')
+print(9,'-djpeg','Plots\sim2_comp_k');
 
 figure(10)
 hold on 
@@ -278,6 +278,7 @@ plot(sim.model2.x, sim.model2.V, 'x-')
 title('$$\vec{V}$$ Profile at $Y^*=0$','Interpreter','latex');
 xlabel('$X$ [m]','Interpreter','latex');
 ylabel('$$\vec{V}$$ [m/s]','Interpreter','latex');
-legend('Ref.', 'Model 1', 'Model 2')
+legend({'$\theta = 0 ^{\circ}$', '$\theta_1 = -20 ^{\circ}$', ...
+        '$\theta_2 = 10 ^{\circ}$'},'Interpreter','latex')
 print(10,'-djpeg','Plots\sim2_comp_V');
 

@@ -10,7 +10,8 @@ function [ fig ] = plotexpy3(sim, sim1, sim2, fignum, name, xname)
     title(t1,'Interpreter','latex');
     xlabel(xname,'Interpreter','latex');
     ylabel('$Y$ [m]','Interpreter','latex');
-    legend('Ref.', 'Model 1', 'Model 2')
+    legend({'$\theta = 0 ^{\circ}$', '$\theta_1 = -20 ^{\circ}$', ...
+        '$\theta_2 = 10 ^{\circ}$'},'Interpreter','latex')
 
     subplot(2,3,2)
     hold on 
@@ -21,7 +22,7 @@ function [ fig ] = plotexpy3(sim, sim1, sim2, fignum, name, xname)
     title(t2,'Interpreter','latex');
     xlabel(xname,'Interpreter','latex');
     ylabel('$Y$ [m]','Interpreter','latex');
-    legend('Ref.', 'Model 1', 'Model 2')
+%     legend('Ref.', 'Model 1', 'Model 2')
     
     subplot(2,3,3)
     hold on 
@@ -32,7 +33,7 @@ function [ fig ] = plotexpy3(sim, sim1, sim2, fignum, name, xname)
     title(t3,'Interpreter','latex');
     xlabel(xname,'Interpreter','latex');
     ylabel('$Y$ [m]','Interpreter','latex');
-    legend('Ref.', 'Model 1', 'Model 2')
+%     legend('Ref.', 'Model 1', 'Model 2')
     
     subplot(2,3,4)
     hold on 
@@ -43,7 +44,7 @@ function [ fig ] = plotexpy3(sim, sim1, sim2, fignum, name, xname)
     title(t4,'Interpreter','latex');
     xlabel(xname,'Interpreter','latex');
     ylabel('$Y$ [m]','Interpreter','latex');
-    legend('Ref.', 'Model 1', 'Model 2')
+%     legend('Ref.', 'Model 1', 'Model 2')
     
     subplot(2,3,5)
     hold on 
@@ -54,7 +55,7 @@ function [ fig ] = plotexpy3(sim, sim1, sim2, fignum, name, xname)
     title(t5,'Interpreter','latex');
     xlabel(xname,'Interpreter','latex');
     ylabel('$Y$ [m]','Interpreter','latex');
-    legend('Ref.', 'Model 1', 'Model 2')
+%     legend('Ref.', 'Model 1', 'Model 2')
     
     subplot(2,3,6)
     hold on 
@@ -65,7 +66,7 @@ function [ fig ] = plotexpy3(sim, sim1, sim2, fignum, name, xname)
     title(t6,'Interpreter','latex');
     xlabel(xname,'Interpreter','latex');
     ylabel('$Y$ [m]','Interpreter','latex');
-    legend('Ref.', 'Model 1', 'Model 2')
+%     legend('Ref.', 'Model 1', 'Model 2')
     
     plotstr=strcat('Plots\sim_comp',name);   
     plotstr=char(plotstr);

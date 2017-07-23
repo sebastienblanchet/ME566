@@ -1,0 +1,34 @@
+%
+% >>> Nomenclatures
+%
+\chapter{Glossary}
+%% Symbols
+\nomenclatureitem[\textbf{Unit (SI)}]{\textbf{Symbol}}{\textbf{Description}}
+\nomenclatureitem[$\Unit{mm}$]{$a$}{Cylindrical Shell Radius}
+
+%Greek
+\nomenclatureitem[$\Unit{mm^{-1}}$]{$\beta$}{Thin Shell Parameter}
+\nomenclatureitem[]{}{}
+
+%% Acronym
+\nomenclatureitem{\textbf{Acronym}}{\textbf{Description}}
+\nomenclatureitem{ASME}{American Society of Mechanical Engineers}
+
+
+
+%% >>> Summary
+%%
+\chapter{Summary}
+
+The objective of this report is to perform a structural analysis on Altaeros' grounded TMS winch, focusing on the sizing of drum and flange thicknesses.\\
+
+An external pressure $p=1376\Unit{psi}= 9.484\Unit{MPa}$ is calculated from the Capstan equation as a result of the tethers maximum tension. Initial drum thicknesses are determined by study of ASME's BPVC, EN, DNV and TWPV standards yielding a range of $t\in [0.825, 1.680]$ in / $\in [21.0, 43.2]$ mm.\\
+
+The theory of thin shells is presented to setup analytical drum thickness results of 1.686 in / 42.8 mm. for a fixed end cylinder, loaded with uniform pressure $p$. Buckling analysis is also completed, resulting in 0.418 in / 10.6 mm for a critical buckling pressure of $p'=p$, confirming that buckling is not the primary mode of failure.\\
+
+%%%%%
+Utilizing various loading scenarios, FEA simulations are investigated. Run 1 yields 1.200 \& 0.875 in for uniform pressure $p$ and both fixed / simply supported ends, respectively. Run 2 yields 0.650 \& 0.550 for a Capstan pressure profile with fixed and simply supported ends, respectively. Run 3 yields a critical thickness of 0.375 in for a uniform critical buckling pressure $p'=p$ with simply supported ends. Run 4 yields 0.250 in as a preliminary flange thickness.\\
+
+In summary, the drum barrel shall be manufactured with a Schedule 30 ($t=$ 0.625 in), 28 in OD pipe. Flanges should be cut from a $3\Unit{feet}^2$ by $0.250\Unit{in}$ thick plate.\\
+
+Future works should focus on refining the flange design, nonlinear buckling, drum fatigue analysis as a result of changing tether loads and assembly proof testing.

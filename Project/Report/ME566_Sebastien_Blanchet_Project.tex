@@ -3,8 +3,7 @@
 %%                               Document Template
 %%
 %%%%% --------------------------------------------------------------------------------
-%% FORKED GITHUB PROJECT:
-%% MODIFIED BY SEBASTIEN BLANCHET JUNE 2017
+%% MODIFIED BY SEBASTIEN BLANCHET JULY 2017
 %%%%% --------------------------------------------------------------------------------
 %%
 %%%%************************ Document Class Declaration ******************************
@@ -19,23 +18,6 @@
 %%%%************************* Command Define and Settings ****************************
 %%
 \usepackage[list, table]{Style/commons}% common settings
-%% usage: \usepackage[option1,option2,...,optionN]{commons}
-%% Multiple optional arguments:
-%% [<numbered|authoryear|alpha>] % citation and reference style
-%% <numbered>: textual: Jones [1]; parenthetical: [1]. default style
-%% <authoryear>: textual: Jones (1995); parenthetical: (Jones, 1995)
-%% <alpha>: textual: not available; parenthetical: [Jon95]
-%% [myhdr] % one available header and footer style, will enable fancyhdr
-%% [lscape] % provide landscape layout environment
-%% [geometry] % configure page layout by geometry package
-%% [list] % enable enhanced list environments, useful for Algorithm and Coding
-%% [color] % enable color package to use color, default package is xcolor
-%% [background] % enable page background, will auto enable color package
-%% [tikz] % enable tikz for complex diagrams, will auto enbale color package
-%% [table] % enable a t able package for complex tables, default is ctable
-%% [math] % enable some extra math packages
-
-
 %% Added packages
 \usepackage{Style/custom}% user defined commands
 %% For multi line equations
@@ -68,6 +50,7 @@
 %%%%% --------------------------------------------------------------------------------
 
 
+
 %%%%******************************** Frontmatter *************************************
 %%
 %% Frontmatter of Title page, Table of contents, Preface chapter.
@@ -90,6 +73,13 @@
 \listoftables% tables catalog
 
 %%%%% --------------------------------------------------------------------------------
+
+%% >>> prematter
+%%
+%% input tex file
+%\input{Tex/Prematter}% list of symbols, preface of books
+%%
+%%%%%
 
 %%%%******************************** Mainmatter **************************************
 %%

@@ -1,0 +1,60 @@
+\chapter{Introduction}
+\label{ch:intro}
+
+\section{Purpose}
+\label{sect:purpose}
+It is of interest to determine the side inlet angle effect on the combustor's mixing. For the sake of this project:
+
+\begin{itemize}
+\item $\theta_0 \Rightarrow$ Reference model, 0\textsuperscript{o} 
+\item $\theta_1 \Rightarrow$ Model 1, -20\textsuperscript{o} 
+\item $\theta_2 \Rightarrow$ Model 2, 10\textsuperscript{o}\\
+\end{itemize}
+
+Dimensionless coordinate system in $X,Y,Z$ directions \ref{eq:xstr} - \ref{eq:zstr} as per \cite{art}.
+\begin{equation}
+	X^* \equiv
+	\begin{cases}
+ 		\frac{X}{H} & X\geq 0\\
+		\frac{X}{L_d} & X < 0\\
+	\end{cases}
+	\label{eq:xstr}
+\end{equation}
+
+\begin{equation}
+	\label{eq:ystr}
+	Y^* \equiv \frac{Y}{H/2}
+\end{equation}
+
+\begin{equation}
+	\label{eq:zstr}
+	Z^* \equiv \frac{Z}{Z_c /2}
+\end{equation}
+
+\section{Background}
+\label{sect:background}
+Apparatus. \\
+
+Geometry values in Table~\ref{tab:param} \cite{art}.
+\begin{table}[H]
+  \centering
+  \caption{Project parameters.}
+    \begin{tabular}{lccc}
+    \toprule
+    \textbf{Description} & \textbf{Symbol} & \textbf{Value} & \textbf{Unit} \\
+    \midrule
+    Combustor height & $H$   & 30    & mm \\
+    Dome height & $L_d$ & 15    & mm \\
+    Bulk mean velocity & $U_{REF}$   & 23.9  & m/s \\
+    Reynolds number & $Re$  & 4.56E+04 & - \\
+    Width of side inlet & $W_a$ & 15    & mm \\
+    Width of axial inlet & $W_f$ & 1.58  & mm \\
+    Combustor span-wise width & $Z_c$ & 120   & mm \\
+    Duct length & $L$   & 2000  & mm \\
+    \bottomrule
+    \end{tabular}%
+  \label{tab:param}
+\end{table}
+
+\section{Scope}
+In this report, the geometry, mesh and set-up for all three models will be presented in the CFX-Pre section. After this, results for each simulation will be presented. Results will be compared with each other and final conclusions will be made,

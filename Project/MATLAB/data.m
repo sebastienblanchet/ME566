@@ -281,4 +281,3 @@ ylabel('$$\vec{V}$$ [m/s]','Interpreter','latex');
 legend({'$\theta = 0 ^{\circ}$', '$\theta_1 = -20 ^{\circ}$', ...
         '$\theta_2 = 10 ^{\circ}$'},'Interpreter','latex')
 print(10,'-djpeg','Plots\sim2_comp_V');
-

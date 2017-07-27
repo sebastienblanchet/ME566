@@ -1,14 +1,97 @@
-
-\includepdf[scale=0.8, pages=1,
-pagecommand=\chapter{Appendix A: CFX Results}
+\chapter{Appendix A: CFX Results}
 \label{appendix:cfx}
-\hypertarget{appendixa}{},
-offset=0 -3cm]{results.pdf}
-\includepdf[scale=0.8, pages=2-4,pagecommand={},offset=0 -2.5cm]{results.pdf}
+\hypertarget{appendixa}{}
+
+\renewcommand{\thesection}{A.\arabic{section}}
+\renewcommand\thefigure{A.\arabic{figure}} 
+
+\section{Velocity $\vec{V}$}
+\begin{figure}[H]
+    	\centering
+        \includegraphics[width=\textwidth]{appendix/vel_ref}
+        \caption{Reference velocity.}
+        \label{fig:vel_ref}
+\end{figure}
+\begin{figure}[H]
+    	\centering
+        \includegraphics[width=\textwidth]{appendix/vel_mod1}
+        \caption{Model 1 velocity.}
+        \label{fig:vel_mod1}
+\end{figure}
+\begin{figure}[H]
+    	\centering
+        \includegraphics[width=\textwidth]{appendix/vel_mod2}
+        \caption{Model 2 velocity.}
+        \label{fig:vel_mod2}
+\end{figure}
+
+%------------------------------------------------------------------------------------------------------
+\begin{figure}[H]
+    	\centering
+        \includegraphics[width=\textwidth]{appendix/velz_ref}
+        \caption{Reference velocity zoom.}
+        \label{fig:velz_ref}
+\end{figure}
+\begin{figure}[H]
+    	\centering
+        \includegraphics[width=\textwidth]{appendix/velz_mod1}
+        \caption{Model 1 velocity zoom.}
+        \label{fig:velz_mod1}
+\end{figure}
+\begin{figure}[H]
+    	\centering
+        \includegraphics[width=\textwidth]{appendix/velz_mod2}
+        \caption{Model 2 velocity zoom.}
+        \label{fig:velz_mod2}
+\end{figure}
+
+%------------------------------------------------------------------------------------------------------
+\section{Turbulent Kinetic Energy $k$}
+\begin{figure}[H]
+    	\centering
+        \includegraphics[width=\textwidth]{appendix/ke_ref}
+        \caption{Reference turbulent kinetic energy.}
+        \label{fig:ke_ref}
+\end{figure}
+\begin{figure}[H]
+    	\centering
+        \includegraphics[width=\textwidth]{appendix/ke_mod1}
+        \caption{Model 1 turbulent kinetic energy.}
+        \label{fig:ke_mod1}
+\end{figure}
+\begin{figure}[H]
+    	\centering
+        \includegraphics[width=\textwidth]{appendix/ke_mod2}
+        \caption{Model 2 turbulent kinetic energy.}
+        \label{fig:ke_mod2}
+\end{figure}
+
+%------------------------------------------------------------------------------------------------------
+\section{Temperature $T$}
+\begin{figure}[H]
+    	\centering
+        \includegraphics[width=\textwidth]{appendix/temp_ref}
+        \caption{Reference temperature.}
+        \label{fig:temp_ref}
+\end{figure}
+\begin{figure}[H]
+    	\centering
+        \includegraphics[width=\textwidth]{appendix/temp_mod1}
+        \caption{Model 1 temperature.}
+        \label{fig:temp_mod1}
+\end{figure}
+\begin{figure}[H]
+    	\centering
+        \includegraphics[width=\textwidth]{appendix/temp_mod2}
+        \caption{Model 2 temperature.}
+        \label{fig:temp_mod2}
+\end{figure}
 
 
+%------------------------------------------------------------------------------------------------------
 \chapter{Appendix B: MATLAB Script}
 \label{appendix:matlab}
+\hypertarget{appendixb}{}
 \nopagebreak
 \begin{scriptsize}
 	\lstinputlisting[language=MATLAB]{"C:/Users/Sebastien/Documents/GitHub/ME566/Project/MATLAB/data.m"}

@@ -1,3 +1,12 @@
 %-----------------------------------------------------------------------------------------------------------------
 \chapter{Conclusions}
 \label{ch:conc}
+
+In conclusion, \textbf{something about the combustor}. This experiment served as motivation to study the effects of side inlet angle variation for -20 \textsuperscript{o} and 10 \textsuperscript{o}. \\
+
+A series of three CFX simulations were developed. Appropriate inlet boundary conditions were assigned to both axial and side inlets for each models, based on experimental data. Mixing is simulated by assigning  axial and side entrance temperatures of 100 [\textsuperscript{o}C] and 0 [\textsuperscript{o}C], respectively. To save computational resources, symmetry boundary conditions are used. All walls were set to be smooth, no slip and adiabatic. The thermal heat transfer model is used since Ma $<<$ 1. Due to the high Re number, the $k-\varepsilon$ turbulence model is used. A high resolution advection scheme and turbulence metrics with $t_s = 0.004$ [s] and $\delta_{r_{MAX}}=0.0001$ are used to get a solution that is $\mathcal{O}(\Delta x^2)$ accurate.\\
+
+Simulations were performed for reference, CCW and CW angled models converging on $i= 39, 36, 44$ iterations , respectively. The reference model is validated by comparing $u,v,k$ profiles with experimental data collected at various $X^*$. Quantifying the combustor's mixing ability is done by comparing $u,v,k,T$ at various $X^*$ for each model. From this it was concluded that there is little to no effect on the quality of mixing based on the inlet angle. However, based on slight variations, a CCW angle appears to be the best.\\
+
+
+Upon comparison with other peers from ME566, it appears as though there is not clear answer. Sources of errors attributed to the simulation results were both related to physical and numerical models. Physical model error is a result of the turbulence model selection. Meanwhile, numerical model error is caused by the discretization from the $\mathcal{O}(\Delta x^2)$ accurate differencing scheme.\\

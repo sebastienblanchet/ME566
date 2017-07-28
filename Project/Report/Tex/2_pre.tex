@@ -66,7 +66,7 @@ Using parameters from Table~\ref{tab:param} and \cite{projfaq}, a model of the c
 Note the CFX domain is modelled as for $X^* \in [-1,9]$ based on the required length for full flow development \cite{art} hence, avoiding redundant computation.\\
 
 
-For all three models, an all triangular sweep mesh of maximum element size 0.001 [m] or 1 [mm] is used. In addition all domain wall boundaries are inflated 5 layers with a growth rate of 1.3 and maximum thickness of 0.001 [m] or 1 [mm] (see Figure~\ref{fig:inflation}). These fine mesh parameters are selected due to the irregular geometry. Inflation is assigned to all wall conditions to achieve a finer mesh a the boundary layer.
+For all three models, an all triangular sweep mesh of maximum element size 0.001 [m] or 1 [mm] is used. This maximum size was used to try and limit the node count to 20000 as per  \cite{proj}. In addition all domain wall boundaries are inflated 5 layers with a growth rate of 1.3 and maximum thickness of 0.001 [m] or 1 [mm] (see Figure~\ref{fig:inflation}). These fine mesh parameters are selected due to the irregular geometry. Inflation is assigned to all wall conditions to achieve a finer mesh a the boundary layer.
 
 \begin{figure}[H]
 	\centering
@@ -123,14 +123,13 @@ The heat transfer model is set to ``Thermal Energy'' because the flow is incompr
 
 Where $a=343$ [m/s] is the speed of sound \cite{fluids}. Since Ma = $\tfrac{92.73}{343}=0.3 \leq 1$, the flow is indeed not compressible.\\
 
-\textbf{Applicability of $k-\varepsilon$ Model.}\\
-The ``$k-\varepsilon$" turbulence model with scalable wall functions is used in all models. Primairly, this turbulence model since is the industry standard and provides a good compromise between robustness and accuracry \cite{cfx}. Since the average Reynolds number (Re = 45600) is very large, the flow is highly turbulent therefore indicating that the use of this model is applcicable \cite{cfdbook}.
+The ``$k-\varepsilon$" turbulence model with scalable wall functions is used in all models. Primairly, this turbulence model is selected since it is the industry standard and provides a good compromise between robustness and accuracry \cite{cfx}. Also, because the average Reynolds number (Re = 45600) is very large, the flow is highly turbulent therefore indicating that the use of this model is applcicable \cite{cfdbook}.
 
 %-----------------------------------------------------------------------------------------------------------------
 \section{Numerical Parameters}
 \label{sec:pre_num}
 
-High resolution advection scheme and turbulence metrics. These schemes are used as they are second order accurate.\\
+High resolution advection scheme and turbulence metrics. These schemes are used as they are second order accurate, hence providing the best possible numerical results in CFX.\\
 
 %\cite{cfdbook}
 %\begin{equation}
@@ -164,14 +163,14 @@ High resolution advection scheme and turbulence metrics. These schemes are used 
 %
 %Therefore calculate Pe as
 
-From \cite{tut}, the following equation is used to calculate the physical timescale $t_s$. 
+From \cite{tut}, better convergence is achieved when \ref{eq:ts} is used to calculate the physical timescale $t_s$. 
 \begin{equation}
 	\label{eq:ts}
 	t_s = \frac{1}{3} \left( \frac{L}{U} \right)
 \end{equation}
-Using $L = L_d + X^* H = 285$ [mm] = 0.285 [m] $\Rightarrow t_s$ 0.004 [s].\\  
+Where $L\equiv$ domain length and $U\equiv$ mean velocity in domain. Using parameters from Table~\ref{tab:param}, $L = L_d + 9\cdot H = 285$ [mm] = 0.285 [m] (since the domain is defined on $X^*\in [-1,9]$) which yields $t_s$ 0.004 [s].\\  
 
-With a maximum iteration count of 50, the maximum residuals $\delta_{r_{MAX}}$ is set to 0.0001 for numerical accurate results.
+With a maximum iteration count of 50, the maximum residuals $\delta_{r_{MAX}}$ is set to 0.0001 for numerically accurate results.
 
 %-----------------------------------------------------------------------------------------------------------------
 \section{Model Summary}
